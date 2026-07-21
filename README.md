@@ -1,226 +1,251 @@
-# SOKIX Toolkit - Entorno Profesional de Hacking Ético
+🛡️ SOKIX Toolkit v12
 
-![Banner SOKIX](https://sokix-security.com/assets/banner.png)
+<p align="center">
+  <img src="assets/banner.png" alt="SOKIX Toolkit Banner" width="100%">
+</p>
+<p align="center">
+  <strong>Entorno profesional de hacking ético para Kali Linux</strong>
+</p>
+<p align="center">
+</p>
 
-[![Licencia MIT](https://img.shields.io/badge/Licencia-MIT-green.svg)](LICENSE)
-[![Versión](https://img.shields.io/badge/Versión-8.0.0-blue.svg)](https://github.com/sokix/toolkit/releases)
-[![Plataforma](https://img.shields.io/badge/Plataforma-Linux%20%7C%20Windows%20%7C%20macOS-orange.svg)](https://sokix-security.com)
-[![Documentación](https://img.shields.io/badge/Documentación-Completa-brightgreen.svg)](https://docs.sokix-security.com)
+⸻
 
-## Descripción
+📖 Descripción
 
-SOKIX Toolkit es un entorno profesional de hacking ético diseñado para profesionales de la seguridad. Proporciona una colección completa de herramientas y módulos para pruebas de penetración, análisis de seguridad y hacking ético.
+SOKIX Toolkit es un entorno modular de hacking ético diseñado exclusivamente para Kali Linux. Reúne en una única interfaz una colección de herramientas para auditorías de seguridad, análisis de vulnerabilidades, reconocimiento, pruebas de penetración y generación de informes.
 
-## Características Principales
+Su objetivo es simplificar el trabajo diario de pentesters, investigadores y estudiantes de ciberseguridad mediante un sistema organizado, rápido y fácil de mantener.
 
-- **Herramientas OSINT**: Recopilación de inteligencia de fuentes abiertas
-- **Explotación Web**: Análisis y explotación de vulnerabilidades web
-- **Post-Explotación**: Herramientas avanzadas para mantener acceso
-- **Análisis de Red**: Escaneo y monitoreo de redes
-- **Cracking**: Herramientas de descifrado de contraseñas
-- **Ingeniería Social**: Simulación de ataques de ingeniería social
-- **Forensia Digital**: Análisis forense y recuperación de datos
-- **Hacking de Juegos**: Herramientas para análisis de seguridad en juegos
-- **Hacking Móvil**: Análisis de seguridad en aplicaciones móviles
+⸻
 
-## Requisitos del Sistema
+✨ Características
 
-### Requisitos Mínimos
-- **Memoria (RAM)**: 8GB mínimo, 16GB recomendado
-  - Necesario para ejecutar herramientas de seguridad
-  - Suficiente para operaciones básicas y pruebas
-  - Se requiere más para múltiples herramientas simultáneas
+* 🔍 Reconocimiento y OSINT
+* 🌐 Auditoría de aplicaciones web
+* 📡 Escaneo y análisis de redes
+* 🔐 Auditoría de contraseñas
+* 📱 Seguridad móvil
+* 💾 Forensia digital
+* 📊 Generación automática de informes
+* ⚙️ Instalación y actualización automática
+* 📦 Gestión centralizada de herramientas
+* 🧩 Arquitectura modular
 
-- **Almacenamiento**: 50GB mínimo, 100GB recomendado
-  - Instalación base: ~10GB
-  - Repositorios de herramientas: ~15GB
-  - Listas de palabras y bases de datos: ~10GB
-  - Archivos temporales y caché: ~5GB
-  - Espacio de trabajo: ~10GB
+⸻
 
-- **Procesador**: 4 núcleos mínimo, 8 núcleos recomendado
-  - Intel i5/i7 o AMD Ryzen 5/7 o superior
-  - Soporte para virtualización (VT-x/AMD-V)
-  - 2.5GHz velocidad base mínima
+📂 Estructura del Proyecto
 
-- **Sistema Operativo**:
-  - Windows 10/11 (64-bit)
-  - Linux (Ubuntu 22.04+, Debian 11+, Kali Linux)
-  - macOS 12+
+SOKIX/
+├── assets/
+├── config/
+├── docs/
+├── logs/
+├── modules/
+│   ├── osint/
+│   ├── web/
+│   ├── network/
+│   ├── password/
+│   ├── mobile/
+│   ├── forensics/
+│   └── reporting/
+├── reports/
+├── tools/
+├── install.sh
+├── update.sh
+└── sokix
 
-- **Red**:
-  - Conexión a internet estable
-  - Velocidad de descarga mínima de 25Mbps
-  - Soporte para IPv4/IPv6
+⸻
 
-### Requisitos Recomendados
-- **Memoria (RAM)**: 32GB
-  - Para pruebas de penetración avanzadas
-  - Múltiples máquinas virtuales
-  - Escaneo de red a gran escala
-  - Descifrado de contraseñas avanzado
+💻 Requisitos
 
-- **Almacenamiento**: 1TB SSD
-  - Ejecución más rápida de herramientas
-  - Acceso rápido a bases de datos grandes
-  - Mejor rendimiento para operaciones intensivas en disco
-  - Espacio para múltiples proyectos
+Recurso	Recomendado
+Sistema Operativo	Kali Linux (Rolling)
+RAM	8 GB mínimo (16 GB recomendado)
+CPU	4 núcleos o superior
+Almacenamiento	50 GB libres
+Python	3.11 o superior
+Git	Última versión
 
-- **Procesador**: 16+ núcleos
-  - Intel i9 o AMD Ryzen 9
-  - Mayores velocidades de reloj para mejor rendimiento
-  - Soporte para características avanzadas de virtualización
+Dependencias
 
-- **Gráficos**: GPU dedicada
-  - Para aceleración de descifrado de contraseñas
-  - Operaciones de aprendizaje automático
-  - Herramientas avanzadas de visualización
+* Python 3
+* Git
+* Curl
+* Wget
+* Pip
+* Make
+* GCC
 
-### Requisitos Adicionales
-- Soporte para virtualización habilitado en BIOS
-- Acceso administrativo/root
-- Controladores gráficos actualizados
-- Firmware del sistema actualizado
-- Exclusiones de antivirus para directorios del toolkit
-- Reglas de firewall para herramientas de seguridad
+⸻
 
-## Instalación
+🚀 Instalación
 
-### Windows
-```powershell
-# Instalar dependencias
-winget install git python3
+Actualizar el sistema:
 
-# Clonar repositorio
+sudo apt update && sudo apt full-upgrade -y
+
+Clonar el repositorio:
+
 git clone https://github.com/sokix/toolkit.git
+
+Entrar al directorio:
+
 cd toolkit
 
-# Ejecutar script de instalación
-.\install.ps1
-```
+Dar permisos:
 
-### Linux
-```bash
-# Instalar dependencias
-sudo apt update && sudo apt install -y git python3 python3-pip
-
-# Clonar repositorio
-git clone https://github.com/sokix/toolkit.git
-cd toolkit
-
-# Ejecutar script de instalación
 chmod +x install.sh
+
+Instalar:
+
 ./install.sh
-```
 
-### macOS
-```bash
-# Instalar dependencias
-brew install git python3
+⸻
 
-# Clonar repositorio
-git clone https://github.com/sokix/toolkit.git
-cd toolkit
+▶️ Uso
 
-# Ejecutar script de instalación
-chmod +x install.sh
-./install.sh
-```
+Iniciar SOKIX:
 
-## Uso Básico
+./sokix
 
-```bash
-# Iniciar el toolkit
-./sokix_toolkit.sh
+Mostrar ayuda:
 
-# Verificar estado del sistema
-./sokix_toolkit.sh --diagnostic
+./sokix --help
 
-# Actualizar herramientas
-./sokix_toolkit.sh --update
+Actualizar módulos:
 
-# Limpiar caché
-./sokix_toolkit.sh --clean
-```
+./sokix --update
 
-## Uso Avanzado
+Diagnóstico:
 
-```bash
-# Ejecutar herramienta específica
-./sokix_toolkit.sh --tool nmap
+./sokix --diagnostic
 
-# Configurar proxy
-./sokix_toolkit.sh --proxy 127.0.0.1:8080
+Limpiar archivos temporales:
 
-# Modo silencioso
-./sokix_toolkit.sh --silent
+./sokix --clean
 
-# Generar reporte
-./sokix_toolkit.sh --report
-```
+Generar informe:
 
-## Documentación
+./sokix --report
 
-Para documentación detallada, visite:
-- [Guía de Usuario](https://docs.sokix-security.com/user-guide)
-- [Referencia de Herramientas](https://docs.sokix-security.com/tools)
-- [Tutoriales](https://docs.sokix-security.com/tutorials)
-- [API](https://docs.sokix-security.com/api)
+⸻
 
-## Seguridad
+📦 Módulos
 
-### Características de Seguridad
-- Cifrado de datos en reposo
-- Autenticación de dos factores
-- Registro de auditoría detallado
-- Protección contra inyección de código
-- Validación de entrada estricta
-- Gestión segura de credenciales
+Módulo	Descripción
+OSINT	Inteligencia de fuentes abiertas
+Web	Auditoría de aplicaciones web
+Network	Escaneo y enumeración de redes
+Password	Auditoría y gestión de contraseñas
+Mobile	Seguridad Android
+Forensics	Análisis forense
+Reporting	Informes automáticos
 
-### Divulgación Responsable
-Si descubre una vulnerabilidad, por favor:
-1. No divulgue públicamente
-2. Envíe un correo a security@sokix-security.com
-3. Incluya detalles técnicos
-4. Espere nuestra respuesta
+⸻
 
-## Contribución
+🔄 Actualización
 
-1. Fork el repositorio
-2. Crea una rama (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
+Actualizar el toolkit:
 
-## Soporte
+./update.sh
 
-### Soporte Profesional
-- Email: support@sokix-security.com
-- Teléfono: +34 900 123 456
-- Horario: L-V 9:00-18:00 CET
+O desde el propio programa:
 
-### Soporte Comunitario
-- [Foro](https://community.sokix-security.com)
-- [Discord](https://discord.gg/sokix)
-- [Telegram](https://t.me/sokix_toolkit)
+./sokix --update
 
-## Licencia
+⸻
 
-Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
+📊 Informes
 
-## Agradecimientos
+Los informes generados se almacenan automáticamente en:
 
-- Equipo de desarrollo SOKIX
-- Contribuidores de la comunidad
-- Proyectos de código abierto utilizados
-- Comunidad de seguridad
+reports/
 
-## Descargo de Responsabilidad
+Incluyen:
 
-Este toolkit está diseñado únicamente para:
-- Pruebas de penetración autorizadas
-- Evaluaciones de seguridad
-- Investigación de seguridad
-- Educación en seguridad
+* Resumen de la auditoría
+* Herramientas utilizadas
+* Resultados obtenidos
+* Fecha y hora
+* Estadísticas generales
 
-El uso malicioso o no autorizado está estrictamente prohibido. Los usuarios son responsables de cumplir con todas las leyes y regulaciones aplicables. 
+⸻
+
+🗺️ Roadmap
+
+* ✅ Arquitectura modular
+* ✅ Actualizaciones automáticas
+* ✅ Sistema de informes
+* ✅ Compatibilidad con Kali Linux
+* 🔄 Sistema de plugins
+* 🔄 Dashboard web
+* 🔄 API REST
+* 🔄 Integración con Docker
+* 🔄 Gestión de perfiles
+
+⸻
+
+🤝 Contribuciones
+
+Las contribuciones son bienvenidas.
+
+1. Haz un Fork.
+2. Crea una rama.
+
+git checkout -b feature/nueva-funcion
+
+3. Realiza tus cambios.
+4. Haz un Commit.
+
+git commit -m "Añadir nueva funcionalidad"
+
+5. Sube los cambios.
+
+git push origin feature/nueva-funcion
+
+6. Abre un Pull Request.
+
+⸻
+
+📜 Licencia
+
+Este proyecto está distribuido bajo la licencia MIT.
+
+Consulta el archivo LICENSE para más información.
+
+⸻
+
+⚠️ Aviso Legal
+
+SOKIX Toolkit ha sido desarrollado exclusivamente para:
+
+* Auditorías de seguridad autorizadas.
+* Pruebas de penetración.
+* Investigación en ciberseguridad.
+* Formación y aprendizaje.
+
+Queda prohibido el uso del software para actividades no autorizadas o contrarias a la legislación vigente. El autor y los colaboradores no se responsabilizan del uso indebido del proyecto.
+
+⸻
+
+⭐ Apoya el Proyecto
+
+Si SOKIX Toolkit te resulta útil:
+
+* ⭐ Dale una estrella al repositorio.
+* 🐛 Reporta errores.
+* 💡 Propón nuevas funciones.
+* 🤝 Contribuye al desarrollo.
+
+⸻
+
+<p align="center">
+
+SOKIX Toolkit v12
+
+Professional Ethical Hacking Environment for Kali Linux
+
+Desarrollado para la comunidad de ciberseguridad.
+
+</p>
