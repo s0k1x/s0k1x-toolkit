@@ -1,32 +1,61 @@
-<div align="center">
-
-<img src="assets/logo.png" width="180">
-
-# SOKIX Toolkit
-
-### Professional Offensive Security Framework
-
-<p>
-Una plataforma modular para Pentesting, Red Team, OSINT y Automatización
-desarrollada exclusivamente para Kali Linux.
-</p>
-
-<p>
-
-<a href="#installation">
-<img src="https://img.shields.io/badge/🚀-Get%20Started-0078D7?style=for-the-badge">
-</a>
-
-<a href="#documentation">
-<img src="https://img.shields.io/badge/📖-Documentation-4CAF50?style=for-the-badge">
-</a>
-
-<a href="#modules">
-<img src="https://img.shields.io/badge/🧩-Modules-9C27B0?style=for-the-badge">
-</a>
-
-</p>
-
-<img src="assets/dashboard.png" width="100%">
-
-</div>
+# 🚀 Installation
+Getting started with **SOKIX Toolkit** takes less than a minute.
+## 1. Clone the repository
+```bash
+git clone https://github.com/YOUR_USERNAME/sokix.git
+```
+---
+## 2. Navigate to the project
+```bash
+cd sokix
+```
+---
+## 3. Verify the project files *(Optional)*
+```bash
+ls
+```
+Expected output:
+```text
+assets/
+config/
+core/
+docs/
+logs/
+modules/
+plugins/
+reports/
+scripts/
+install.sh
+README.md
+```
+---
+## 4. Start the installer
+```bash
+bash install.sh
+```
+Or, if administrator privileges are required:
+```bash
+sudo bash install.sh
+```
+---
+## 5. Launch SOKIX
+```bash
+sokix
+```
+If the executable is not yet in your PATH, run it directly:
+```bash
+./sokix
+```
+---
+# ✅ Installation Complete
+You should now see the SOKIX interactive dashboard.
+```text
+███████╗ ██████╗ ██╗  ██╗██╗██╗  ██╗
+██╔════╝██╔═══██╗██║ ██╔╝██║╚██╗██╔╝
+███████╗██║   ██║█████╔╝ ██║ ╚███╔╝
+╚════██║██║   ██║██╔═██╗ ██║ ██╔██╗
+███████║╚██████╔╝██║  ██╗██║██╔╝ ██╗
+╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝
+Professional Offensive Security Framework
+```
+🎉 **SOKIX is now ready for Reconnaissance, OSINT, Red Team Operations, Exploitation, Reporting, and Security Automation.**
