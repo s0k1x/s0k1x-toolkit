@@ -1,83 +1,68 @@
 # ⚡ Installation
-<div align="center">
-### 🚀 Deploy **SOKIX Toolkit** in under **60 seconds**
-Built exclusively for **Kali Linux** with a fast, lightweight and streamlined installation process.
-</div>
+Deploy **SOKIX Toolkit** in less than **60 seconds**.
 ---
-## 📋 System Requirements
-| Component | Requirement |
-|-----------|-------------|
-| 🐉 Operating System | Kali Linux (Rolling Release) |
-| 💻 Architecture | x86_64 |
-| 🐚 Shell | Bash 5.0+ |
-| 🐍 Python | 3.11+ |
-| 🌐 Git | Latest Stable |
-| 📡 Internet | Required during installation |
----
-## 📥 Step 1 — Clone the Repository
+## Clone the Repository
 ```bash
 git clone https://github.com/s0k1x/s0k1x-toolkit.git
 ```
 ---
-## 📂 Step 2 — Enter the Project Directory
+## Enter the Project Directory
 ```bash
 cd s0k1x-toolkit
 ```
 ---
-## 🚀 Step 3 — Run the Installer
+## Install SOKIX
 ```bash
 bash install.sh
 ```
-If administrator privileges are required:
+> If required, run the installer with elevated privileges:
 ```bash
 sudo bash install.sh
 ```
 ---
-## ⚡ Step 4 — Launch SOKIX
+## Launch
 ```bash
 sokix
 ```
-If the executable hasn't been added to your **PATH**, launch it manually:
+If SOKIX hasn't been added to your **PATH**, execute it directly:
 ```bash
 ./sokix
 ```
 ---
-# ✅ Installation Successful
-```console
-┌──(kali㉿kali)-[~/s0k1x-toolkit]
-└─$ sokix
-███████╗ ██████╗ ██╗  ██╗██╗██╗  ██╗
-██╔════╝██╔═══██╗██║ ██╔╝██║╚██╗██╔╝
-███████╗██║   ██║█████╔╝ ██║ ╚███╔╝
-╚════██║██║   ██║██╔═██╗ ██║ ██╔██╗
-███████║╚██████╔╝██║  ██╗██║██╔╝ ██╗
-╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝
-═══════════════════════════════════════════════════════
-Professional Offensive Security Framework
-Version   : v1.0.0
-Platform  : Kali GNU/Linux
-Status    : Ready
-Workspace : ~/SOKIX
-═══════════════════════════════════════════════════════
+# ✔ Installation Successful
+```text
+╔════════════════════════════════════════════════════════════╗
+║                                                            ║
+║   ███████╗ ██████╗ ██╗  ██╗██╗██╗  ██╗                    ║
+║   ██╔════╝██╔═══██╗██║ ██╔╝██║╚██╗██╔╝                    ║
+║   ███████╗██║   ██║█████╔╝ ██║ ╚███╔╝                     ║
+║   ╚════██║██║   ██║██╔═██╗ ██║ ██╔██╗                     ║
+║   ███████║╚██████╔╝██║  ██╗██║██╔╝ ██╗                    ║
+║   ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝                    ║
+║                                                            ║
+║        Professional Offensive Security Framework           ║
+║                                                            ║
+╚════════════════════════════════════════════════════════════╝
 ```
----
-## 🎯 Ready to Operate
-SOKIX Toolkit is now fully configured and ready for professional offensive security operations.
+SOKIX is now fully installed and ready to perform:
 - 🌐 Advanced Reconnaissance
 - 🔍 OSINT Intelligence Gathering
-- 🌍 Web Application Security Testing
-- 📡 Network Security Assessment
-- 📶 Wireless Auditing
-- 💥 Exploitation
-- 🔑 Post-Exploitation
-- 🤖 Workflow Automation
+- 🎯 Red Team Operations
+- 💥 Exploitation & Post-Exploitation
+- 📡 Wireless Security Assessments
+- 🌍 Web Application Testing
+- ⚡ Security Automation
 - 📊 Professional Report Generation
 ---
-## 💡 Recommended
-Before running your first assessment, execute:
-```bash
-sokix --update
-```
-to download the latest modules, templates and security improvements.
+### Minimum Requirements
+| Requirement | Version |
+|-------------|---------|
+| Operating System | Kali Linux (Latest) |
+| Bash | 5.0+ |
+| Python | 3.11+ |
+| Git | Latest Stable |
+| Internet Connection | Required for first-time setup |
 ---
-> **SOKIX Toolkit** is officially developed and optimized for **Kali Linux**. While it may run on other Linux distributions, only Kali Linux is fully supported and tested.
+> **SOKIX Toolkit** has been designed exclusively for **Kali Linux** to provide a consistent, optimized and professional offensive security experience. 
+
+Mejora eate
