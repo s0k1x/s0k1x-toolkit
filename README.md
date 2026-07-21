@@ -1,110 +1,66 @@
 # ⚡ Installation
-<div align="center">
-<img src="https://img.shields.io/badge/Platform-Kali%20Linux-557C94?style=for-the-badge&logo=kalilinux&logoColor=white">
-### Designed and optimized exclusively for **Kali Linux**
 Deploy **SOKIX Toolkit** in less than **60 seconds**.
-</div>
 ---
-## 📋 Requirements
-| Component | Requirement |
-|-----------|-------------|
-| **Operating System** | Kali Linux (Rolling Release) |
-| **Architecture** | x86_64 |
-| **Shell** | Bash 5+ |
-| **Python** | Python 3.11+ |
-| **Git** | Latest Stable |
-| **Internet** | Required for installation |
----
-## 📥 Clone Repository
+## Clone the Repository
 ```bash
 git clone https://github.com/s0k1x/s0k1x-toolkit.git
 ```
 ---
-## 📂 Enter the Directory
+## Enter the Project Directory
 ```bash
 cd s0k1x-toolkit
 ```
 ---
-## 📄 Verify Files *(Optional)*
-```bash
-ls
-```
-```text
-assets/
-config/
-core/
-docs/
-modules/
-plugins/
-reports/
-scripts/
-install.sh
-README.md
-LICENSE
-```
----
-## 🚀 Start Installation
+## Install SOKIX
 ```bash
 bash install.sh
 ```
-or
+> If required, run the installer with elevated privileges:
 ```bash
 sudo bash install.sh
 ```
 ---
-## ⚙️ Installation Preview
-```console
-┌──(kali㉿kali)-[~/s0k1x-toolkit]
-└─$ bash install.sh
-╔════════════════════════════════════════════════════════════╗
-║                     SOKIX INSTALLER                       ║
-╚════════════════════════════════════════════════════════════╝
-[✓] Detecting operating system...
-    Kali GNU/Linux detected
-[✓] Checking required packages...
-[✓] Installing dependencies...
-[✓] Configuring environment...
-[✓] Installing framework modules...
-[✓] Creating workspace...
-[✓] Applying permissions...
-[✓] Cleaning temporary files...
-────────────────────────────────────────────────────────────
-Installation completed successfully.
-────────────────────────────────────────────────────────────
-```
----
-## ▶ Launch
+## Launch
 ```bash
 sokix
 ```
-or
+If SOKIX hasn't been added to your **PATH**, execute it directly:
 ```bash
 ./sokix
 ```
 ---
-# ✅ Installation Complete
-```console
-┌──(kali㉿kali)-[~]
-└─$ sokix
-███████╗ ██████╗ ██╗  ██╗██╗██╗  ██╗
-██╔════╝██╔═══██╗██║ ██╔╝██║╚██╗██╔╝
-███████╗██║   ██║█████╔╝ ██║ ╚███╔╝
-╚════██║██║   ██║██╔═██╗ ██║ ██╔██╗
-███████║╚██████╔╝██║  ██╗██║██╔╝ ██╗
-╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝
-Professional Offensive Security Framework
-Version 1.0.0
-Status: Ready
+# ✔ Installation Successful
+```text
+╔════════════════════════════════════════════════════════════╗
+║                                                            ║
+║   ███████╗ ██████╗ ██╗  ██╗██╗██╗  ██╗                    ║
+║   ██╔════╝██╔═══██╗██║ ██╔╝██║╚██╗██╔╝                    ║
+║   ███████╗██║   ██║█████╔╝ ██║ ╚███╔╝                     ║
+║   ╚════██║██║   ██║██╔═██╗ ██║ ██╔██╗                     ║
+║   ███████║╚██████╔╝██║  ██╗██║██╔╝ ██╗                    ║
+║   ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝                    ║
+║                                                            ║
+║        Professional Offensive Security Framework           ║
+║                                                            ║
+╚════════════════════════════════════════════════════════════╝
 ```
+SOKIX is now fully installed and ready to perform:
+- 🌐 Advanced Reconnaissance
+- 🔍 OSINT Intelligence Gathering
+- 🎯 Red Team Operations
+- 💥 Exploitation & Post-Exploitation
+- 📡 Wireless Security Assessments
+- 🌍 Web Application Testing
+- ⚡ Security Automation
+- 📊 Professional Report Generation
 ---
-## 🎯 You're Ready
-SOKIX has been successfully installed and is ready to perform:
-- 🌐 Reconnaissance
-- 🔍 OSINT
-- 🌍 Web Security
-- 📡 Network Auditing
-- 💥 Exploitation
-- 🔑 Post-Exploitation
-- 🤖 Automation
-- 📊 Professional Reporting
-> **Officially developed for Kali Linux.**
+### Minimum Requirements
+| Requirement | Version |
+|-------------|---------|
+| Operating System | Kali Linux (Latest) |
+| Bash | 5.0+ |
+| Python | 3.11+ |
+| Git | Latest Stable |
+| Internet Connection | Required for first-time setup |
+---
+> **SOKIX Toolkit** has been designed exclusively for **Kali Linux** to provide a consistent, optimized and professional offensive security experience.
