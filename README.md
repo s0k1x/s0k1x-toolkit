@@ -1,192 +1,162 @@
+<div align="center">
+<img src="assets/logo.png" width="180">
+
 🛡️ SOKIX Toolkit v12
 
-<p align="center">
-  <img src="assets/banner.png" width="100%" alt="SOKIX Toolkit">
+Professional Ethical Hacking Environment for Kali Linux
+
+Una plataforma moderna para Pentesting, Red Team, OSINT, Análisis de Vulnerabilidades y Automatización desarrollada exclusivamente para Kali Linux.
+
+<p>
 </p>
-<p align="center">
-  <strong>Entorno Profesional de Hacking Ético para Kali Linux</strong>
-</p>
-<p align="center">
-  Una plataforma modular diseñada para centralizar herramientas de auditoría de seguridad, automatizar tareas y optimizar el trabajo de pentesters, investigadores y profesionales de la ciberseguridad.
-</p>
-<p align="center">
-</p>
+<img src="assets/demo.gif" width="900">
+</div>
 
 ⸻
 
-📖 Descripción
+⚡ ¿Qué es SOKIX?
 
-SOKIX Toolkit es una colección modular de herramientas para hacking ético, pruebas de penetración y análisis de seguridad desarrollada exclusivamente para Kali Linux.
+SOKIX Toolkit reúne en un único entorno las herramientas más utilizadas durante una auditoría de seguridad, organizándolas mediante una arquitectura modular y una interfaz sencilla para reducir el tiempo de preparación y mejorar el flujo de trabajo.
 
-Su objetivo es ofrecer un entorno organizado donde ejecutar tareas de reconocimiento, auditoría, análisis y generación de informes desde una única interfaz.
+Está orientado a:
 
-El toolkit está pensado para laboratorios, auditorías autorizadas y formación en ciberseguridad.
+* 👨‍💻 Pentesters
+* 🔴 Equipos Red Team
+* 🎓 Estudiantes de Ciberseguridad
+* 🛡️ Auditores de Seguridad
+* 🔬 Investigadores
 
 ⸻
 
 ✨ Características
 
-* 🔍 Reconocimiento (OSINT)
-* 🌐 Auditoría Web
-* 📡 Escaneo de Redes
-* 🔐 Auditoría de Contraseñas
-* 📱 Seguridad Móvil
-* 💾 Forensia Digital
-* 📊 Informes automáticos
-* ⚙️ Actualizaciones integradas
-* 📂 Organización modular
-* 🚀 Instalación sencilla
+	
+🔍 OSINT	Inteligencia de fuentes abiertas
+🌐 Web	Auditoría de aplicaciones web
+📡 Network	Descubrimiento y análisis de redes
+🔐 Passwords	Auditoría de credenciales
+📱 Mobile	Seguridad Android
+💾 Forensics	Análisis forense
+📊 Reports	Informes automáticos
+⚙️ Updates	Actualizaciones automáticas
+📂 Workspace	Organización por proyectos
+🧩 Modules	Sistema modular
+
+⸻
+
+🖥️ Vista General
+
+                  ┌──────────────────────────────┐
+                  │        SOKIX Toolkit         │
+                  └──────────────┬───────────────┘
+                                 │
+        ┌───────────────┬────────┼────────┬───────────────┐
+        │               │        │        │               │
+      OSINT          WEB      NETWORK   MOBILE      FORENSICS
+        │               │        │        │               │
+        └───────────────┴────────┼────────┴───────────────┘
+                                 │
+                          REPORT GENERATOR
+                                 │
+                          HTML • JSON • TXT
 
 ⸻
 
 📂 Estructura
 
 SOKIX/
-├── modules/
-├── tools/
-├── config/
-├── reports/
-├── logs/
+│
 ├── assets/
+├── config/
 ├── docs/
+├── logs/
+├── modules/
+│   ├── osint/
+│   ├── web/
+│   ├── network/
+│   ├── passwords/
+│   ├── mobile/
+│   ├── forensics/
+│   └── reporting/
+│
+├── reports/
+├── tools/
 ├── install.sh
 ├── update.sh
 └── sokix
 
 ⸻
 
-💻 Requisitos
-
-Recurso	Recomendado
-Sistema	Kali Linux (Rolling)
-RAM	8 GB (16 GB recomendado)
-CPU	4 núcleos o superior
-Disco	50 GB libres
-Python	3.11+
-Git	Última versión
-
-⸻
-
 🚀 Instalación
 
-Actualizar el sistema:
-
 sudo apt update && sudo apt full-upgrade -y
-
-Clonar el proyecto:
-
 git clone https://github.com/sokix/toolkit.git
-
-Entrar al directorio:
-
 cd toolkit
-
-Conceder permisos:
-
 chmod +x install.sh
-
-Instalar:
-
 ./install.sh
 
 ⸻
 
 ▶️ Uso
 
-Ejecutar SOKIX:
-
+# Iniciar
 ./sokix
-
-Mostrar ayuda:
-
+# Ayuda
 ./sokix --help
-
-Actualizar módulos:
-
+# Actualizar
 ./sokix --update
-
-Diagnóstico:
-
+# Diagnóstico
 ./sokix --diagnostic
-
-Generar informe:
-
+# Informe
 ./sokix --report
 
 ⸻
 
-📦 Módulos
+📊 Información
 
-Módulo	Función
-OSINT	Inteligencia de fuentes abiertas
-Web	Auditoría de aplicaciones web
-Network	Escaneo y enumeración de redes
-Password	Auditoría de credenciales
-Mobile	Seguridad Android
-Forensics	Análisis forense
-Reports	Generación de informes
-
-⸻
-
-🎯 Objetivos
-
-* Centralizar herramientas de seguridad.
-* Automatizar tareas repetitivas.
-* Simplificar auditorías.
-* Mejorar la organización del entorno de trabajo.
-* Facilitar el aprendizaje y la investigación.
+Característica	Estado
+Plataforma	✅ Kali Linux
+Arquitectura	✅ Modular
+Actualizaciones	✅ Automáticas
+Informes	✅ HTML / JSON
+Configuración	✅ Centralizada
+Plugins	🚧 En desarrollo
 
 ⸻
 
-🛣️ Roadmap
+🗺️ Roadmap
 
-* ✅ Sistema modular
-* ✅ Actualizaciones automáticas
-* ✅ Gestión de informes
-* ✅ Compatibilidad con Kali Linux
-* ⏳ Sistema de plugins
-* ⏳ Dashboard web
-* ⏳ API REST
-* ⏳ Integración con Docker
-
-⸻
-
-🤝 Contribuir
-
-Las contribuciones son bienvenidas.
-
-1. Haz un Fork.
-2. Crea una nueva rama.
-3. Realiza tus cambios.
-4. Envía un Pull Request.
+* ✅ Toolkit modular
+* ✅ Sistema de informes
+* ✅ Instalador automático
+* ✅ Actualizador
+* 🚧 Sistema de plugins
+* 🚧 Dashboard Web
+* 🚧 Docker
+* 🚧 API REST
+* 🚧 Gestión de Workspaces
 
 ⸻
 
-📜 Licencia
+⚠️ Uso Responsable
 
-Este proyecto está distribuido bajo la licencia MIT. Consulta el archivo LICENSE para más información.
+Este proyecto ha sido desarrollado para:
 
-⸻
-
-⚠️ Aviso Legal
-
-SOKIX Toolkit está destinado exclusivamente para:
-
-* Auditorías de seguridad autorizadas.
-* Pruebas de penetración.
+* Auditorías autorizadas.
+* Pentesting profesional.
+* Formación.
 * Investigación en ciberseguridad.
-* Formación y aprendizaje.
 
-El uso de este software sobre sistemas sin autorización puede ser ilegal. Cada usuario es responsable de cumplir con la legislación vigente y de utilizar el toolkit únicamente en entornos donde tenga permiso expreso para realizar pruebas.
+No utilices SOKIX Toolkit contra sistemas para los que no dispongas de autorización.
 
 ⸻
 
-<p align="center">
+<div align="center">
 
 ⭐ SOKIX Toolkit v12
 
-Professional Ethical Hacking Toolkit for Kali Linux
+One Toolkit. Multiple Security Workflows.
 
-Si este proyecto te resulta útil, considera darle una ⭐ en GitHub y contribuir a su desarrollo.
+Si este proyecto te resulta útil, dale una ⭐ al repositorio y contribuye a su desarrollo.
 
-</p>
+</div>
