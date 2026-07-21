@@ -1,36 +1,40 @@
 # ⚡ Installation
 <div align="center">
-### Deploy **SOKIX Toolkit** in less than **60 seconds**
-A fast and lightweight installation process designed exclusively for **Kali Linux**.
-No complex configuration. No unnecessary setup.  
-Just clone the repository, run the installer and start working.
+<img src="https://img.shields.io/badge/Kali%20Linux-2025.x-557C94?style=for-the-badge&logo=kalilinux&logoColor=white">
+### Built **exclusively** for Kali Linux
+SOKIX is optimized for the Kali Linux ecosystem and officially supports the latest rolling releases.
 </div>
 ---
-## ① Clone the Repository
-Download the latest version directly from GitHub.
-```console
-$ git clone https://github.com/s0k1x/s0k1x-toolkit.git
-Cloning into 's0k1x-toolkit'...
-remote: Enumerating objects...
-remote: Counting objects...
-Receiving objects: 100%
-✔ Repository cloned successfully.
+## 📋 Requirements
+| Component | Minimum |
+|-----------|---------|
+| **OS** | Kali Linux 2024.x / 2025.x (Rolling) |
+| **Architecture** | x86_64 |
+| **Shell** | Bash 5+ |
+| **Python** | 3.11+ |
+| **Git** | Latest |
+| **Internet** | Required during installation |
+---
+## 📥 Clone the Repository
+```bash
+git clone https://github.com/s0k1x/s0k1x-toolkit.git
 ```
 ---
-## ② Enter the Project Directory
-```console
-$ cd s0k1x-toolkit
+## 📂 Navigate into the Project
+```bash
+cd s0k1x-toolkit
 ```
 ---
-## ③ Verify the Project Files *(Optional)*
-```console
-$ ls
+## 📄 Verify Project Files *(Optional)*
+```bash
+ls
 ```
 ```text
 assets/
 config/
 core/
 docs/
+logs/
 modules/
 plugins/
 reports/
@@ -40,77 +44,70 @@ README.md
 LICENSE
 ```
 ---
-## ④ Run the Installer
-Execute the installation script.
-```console
-$ bash install.sh
+## 🚀 Run the Installer
+```bash
+bash install.sh
 ```
-If administrator privileges are required:
-```console
-$ sudo bash install.sh
+If elevated privileges are required:
+```bash
+sudo bash install.sh
 ```
 ---
-## ⑤ Installation Process
+## ⚙️ Installation Output
 ```text
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                 S O K I X   I N S T A L L E R
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-[✓] Detecting operating system...
-[✓] Kali Linux detected
-[✓] Checking dependencies...
-[✓] Installing required packages...
-[✓] Configuring environment...
-[✓] Installing modules...
-[✓] Creating workspace...
-[✓] Setting executable permissions...
-[✓] Finalizing installation...
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Installation completed successfully.
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+┌────────────────────────────────────────────────────────────┐
+│                                                            │
+│                 SOKIX TOOLKIT INSTALLER                    │
+│                                                            │
+├────────────────────────────────────────────────────────────┤
+[✓] Checking Operating System
+    Kali GNU/Linux 2025.x detected
+[✓] Verifying architecture
+    x86_64
+[✓] Checking required packages
+[✓] Installing dependencies
+[✓] Configuring environment
+[✓] Installing framework modules
+[✓] Creating workspace
+[✓] Updating permissions
+[✓] Cleaning temporary files
+[✓] Installation completed successfully
+└────────────────────────────────────────────────────────────┘
 ```
 ---
-## ⑥ Launch SOKIX
-```console
-$ sokix
+## 🖥 Launch SOKIX
+```bash
+sokix
 ```
-If SOKIX has not yet been added to your **PATH**, launch it directly:
-```console
-$ ./sokix
+or
+```bash
+./sokix
 ```
 ---
 # ✔ Installation Complete
 ```text
-╔══════════════════════════════════════════════════════════════╗
-║                                                              ║
-║   ███████╗ ██████╗ ██╗  ██╗██╗██╗  ██╗                      ║
-║   ██╔════╝██╔═══██╗██║ ██╔╝██║╚██╗██╔╝                      ║
-║   ███████╗██║   ██║█████╔╝ ██║ ╚███╔╝                       ║
-║   ╚════██║██║   ██║██╔═██╗ ██║ ██╔██╗                       ║
-║   ███████║╚██████╔╝██║  ██╗██║██╔╝ ██╗                      ║
-║   ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝                      ║
-║                                                              ║
-║          Professional Offensive Security Framework           ║
-║                                                              ║
-╚══════════════════════════════════════════════════════════════╝
-Version  : 1.0.0
-Platform : Kali Linux
-Status   : Ready
+ ███████╗ ██████╗ ██╗  ██╗██╗██╗  ██╗
+ ██╔════╝██╔═══██╗██║ ██╔╝██║╚██╗██╔╝
+ ███████╗██║   ██║█████╔╝ ██║ ╚███╔╝
+ ╚════██║██║   ██║██╔═██╗ ██║ ██╔██╗
+ ███████║╚██████╔╝██║  ██╗██║██╔╝ ██╗
+ ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝
+ Professional Offensive Security Framework
+ Version  : v1.0.0
+ Platform : Kali GNU/Linux
+ Status   : Ready
 ```
 ---
-## 🎯 What's Next?
-Your environment is now fully configured and ready to use.
-Start exploring the available modules:
+## 🛠 Ready to Operate
+Your environment is now configured and ready to perform professional offensive security operations.
 - 🌐 Reconnaissance
-- 🔍 OSINT
-- 🌍 Web Security
-- 📡 Network Auditing
-- 📶 Wireless Testing
+- 🔍 OSINT Intelligence
+- 🌍 Web Application Testing
+- 📡 Network Assessment
+- 📶 Wireless Auditing
 - 💥 Exploitation
 - 🔑 Post-Exploitation
 - 🤖 Automation
-- 📊 Professional Reporting
+- 📊 Report Generation
 ---
-<div align="center">
-### ⚔️ Welcome to SOKIX.
-**Think Offensive. Stay Defensive.**
-</div>
+> **Officially developed and optimized for Kali Linux.** Other Linux distributions are not officially supported.
