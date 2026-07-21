@@ -1,61 +1,66 @@
-# 🚀 Installation
-Getting started with **SOKIX Toolkit** takes less than a minute.
-## 1. Clone the repository
+# ⚡ Installation
+Deploy **SOKIX Toolkit** in less than **60 seconds**.
+---
+## Clone the Repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/sokix.git
+git clone https://github.com/s0k1x/s0k1x-toolkit.git
 ```
 ---
-## 2. Navigate to the project
+## Enter the Project Directory
 ```bash
-cd sokix
+cd s0k1x-toolkit
 ```
 ---
-## 3. Verify the project files *(Optional)*
-```bash
-ls
-```
-Expected output:
-```text
-assets/
-config/
-core/
-docs/
-logs/
-modules/
-plugins/
-reports/
-scripts/
-install.sh
-README.md
-```
----
-## 4. Start the installer
+## Install SOKIX
 ```bash
 bash install.sh
 ```
-Or, if administrator privileges are required:
+> If required, run the installer with elevated privileges:
 ```bash
 sudo bash install.sh
 ```
 ---
-## 5. Launch SOKIX
+## Launch
 ```bash
 sokix
 ```
-If the executable is not yet in your PATH, run it directly:
+If SOKIX hasn't been added to your **PATH**, execute it directly:
 ```bash
 ./sokix
 ```
 ---
-# ✅ Installation Complete
-You should now see the SOKIX interactive dashboard.
+# ✔ Installation Successful
 ```text
-███████╗ ██████╗ ██╗  ██╗██╗██╗  ██╗
-██╔════╝██╔═══██╗██║ ██╔╝██║╚██╗██╔╝
-███████╗██║   ██║█████╔╝ ██║ ╚███╔╝
-╚════██║██║   ██║██╔═██╗ ██║ ██╔██╗
-███████║╚██████╔╝██║  ██╗██║██╔╝ ██╗
-╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝
-Professional Offensive Security Framework
+╔════════════════════════════════════════════════════════════╗
+║                                                            ║
+║   ███████╗ ██████╗ ██╗  ██╗██╗██╗  ██╗                    ║
+║   ██╔════╝██╔═══██╗██║ ██╔╝██║╚██╗██╔╝                    ║
+║   ███████╗██║   ██║█████╔╝ ██║ ╚███╔╝                     ║
+║   ╚════██║██║   ██║██╔═██╗ ██║ ██╔██╗                     ║
+║   ███████║╚██████╔╝██║  ██╗██║██╔╝ ██╗                    ║
+║   ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝                    ║
+║                                                            ║
+║        Professional Offensive Security Framework           ║
+║                                                            ║
+╚════════════════════════════════════════════════════════════╝
 ```
-🎉 **SOKIX is now ready for Reconnaissance, OSINT, Red Team Operations, Exploitation, Reporting, and Security Automation.**
+SOKIX is now fully installed and ready to perform:
+- 🌐 Advanced Reconnaissance
+- 🔍 OSINT Intelligence Gathering
+- 🎯 Red Team Operations
+- 💥 Exploitation & Post-Exploitation
+- 📡 Wireless Security Assessments
+- 🌍 Web Application Testing
+- ⚡ Security Automation
+- 📊 Professional Report Generation
+---
+### Minimum Requirements
+| Requirement | Version |
+|-------------|---------|
+| Operating System | Kali Linux (Latest) |
+| Bash | 5.0+ |
+| Python | 3.11+ |
+| Git | Latest Stable |
+| Internet Connection | Required for first-time setup |
+---
+> **SOKIX Toolkit** has been designed exclusively for **Kali Linux** to provide a consistent, optimized and professional offensive security experience.
