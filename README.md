@@ -27,6 +27,7 @@
 [![Stars](https://img.shields.io/github/stars/s0k1x/s0k1x-toolkit?style=for-the-badge&color=39FF14&labelColor=0d1117&logo=github&logoColor=39FF14)](https://github.com/s0k1x/s0k1x-toolkit/stargazers)
 [![Issues](https://img.shields.io/github/issues/s0k1x/s0k1x-toolkit?style=for-the-badge&color=39FF14&labelColor=0d1117&logo=github&logoColor=39FF14)](https://github.com/s0k1x/s0k1x-toolkit/issues)
 [![Maintained](https://img.shields.io/badge/MAINTAINED-YES-39FF14?style=for-the-badge&labelColor=0d1117)](#)
+[![Instagram](https://img.shields.io/badge/INSTAGRAM-mariio.008__-39FF14?style=for-the-badge&logo=instagram&logoColor=39FF14&labelColor=0d1117)](https://instagram.com/mariio.008__)
 
 <br>
 
@@ -36,7 +37,8 @@
 <a href="#caracteristicas">✨ Características</a> •
 <a href="#requisitos">📋 Requisitos</a> •
 <a href="#faq">🧩 FAQ</a> •
-<a href="#roadmap">🗺️ Roadmap</a>
+<a href="#roadmap">🗺️ Roadmap</a> •
+<a href="#redes">📡 Redes</a>
 
 </div>
 
@@ -227,6 +229,17 @@ bash uninstall.sh
 - [ ] Panel web de control
 - [ ] Integración con Docker
 - [ ] Soporte multi-distro (experimental)
+
+---
+
+<a name="redes"></a>
+<div align="center">
+
+### 📡 Sígueme
+
+[![Instagram](https://img.shields.io/badge/-mariio.008__-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/mariio.008__)
+
+</div>
 
 ---
 
