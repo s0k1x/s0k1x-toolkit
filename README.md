@@ -1,3 +1,4 @@
+<a name="top"></a>
 <div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:1a1a2e,100:0d1117&height=220&section=header&text=S%20O%20K%20I%20X&fontSize=70&fontColor=39FF14&fontAlignY=38&desc=Professional%20Offensive%20Security%20Framework&descAlignY=58&descSize=18&animation=fadeIn" width="100%"/>
@@ -37,13 +38,14 @@
 
 <br><br>
 
+<!-- Navegación por píldoras — el color de cada una coincide con el acento de su sección -->
 <p>
-<a href="#instalacion"><b>🚀 Instalación</b></a> &nbsp;|&nbsp;
-<a href="#caracteristicas"><b>✨ Características</b></a> &nbsp;|&nbsp;
-<a href="#requisitos"><b>📋 Requisitos</b></a> &nbsp;|&nbsp;
-<a href="#faq"><b>🧩 FAQ</b></a> &nbsp;|&nbsp;
-<a href="#roadmap"><b>🗺️ Roadmap</b></a> &nbsp;|&nbsp;
-<a href="#redes"><b>📲 Contacto</b></a>
+<a href="#instalacion"><img src="https://img.shields.io/badge/🚀_INSTALACIÓN-39FF14?style=for-the-badge&labelColor=0d1117"/></a>
+<a href="#caracteristicas"><img src="https://img.shields.io/badge/✨_CARACTERÍSTICAS-00d9ff?style=for-the-badge&labelColor=0d1117"/></a>
+<a href="#requisitos"><img src="https://img.shields.io/badge/📋_REQUISITOS-ffb800?style=for-the-badge&labelColor=0d1117"/></a>
+<a href="#faq"><img src="https://img.shields.io/badge/🧩_FAQ-b967ff?style=for-the-badge&labelColor=0d1117"/></a>
+<a href="#roadmap"><img src="https://img.shields.io/badge/🗺️_ROADMAP-ff5f7e?style=for-the-badge&labelColor=0d1117"/></a>
+<a href="#redes"><img src="https://img.shields.io/badge/📲_CONTACTO-25D366?style=for-the-badge&labelColor=0d1117"/></a>
 </p>
 
 </div>
@@ -127,6 +129,18 @@ sokix
 </tr>
 </table>
 
+<details>
+<summary><b>⚡ ¿Con prisa? Instálalo en una sola línea</b></summary>
+<br>
+
+```bash
+git clone https://github.com/s0k1x/s0k1x-toolkit.git && cd s0k1x-toolkit && bash install.sh && sokix
+```
+
+</details>
+
+<br>
+
 <div align="center">
 
 ```
@@ -140,6 +154,8 @@ sokix
 │                                                                │
 └──────────────────────────────────────────────────────────────┘
 ```
+
+<sub><a href="#top">⬆️ Volver arriba</a></sub>
 
 </div>
 
@@ -185,9 +201,22 @@ Informes exportables, claros y listos para entregar al cliente.
 
 <div align="center">
 
-| 🌐 Recon | 🔍 OSINT | 🎯 Red Team | 💥 Exploit | 📡 Wireless | 🌍 WebApp |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-| ●●●●● | ●●●●● | ●●●●○ | ●●●●○ | ●●●○○ | ●●●●● |
+<sub>NIVEL DE MADUREZ POR MÓDULO</sub>
+
+<table>
+<tr>
+<td align="center" width="33%"><img src="https://img.shields.io/badge/🌐_RECON-100%25-39FF14?style=flat-square&labelColor=0d1117"/></td>
+<td align="center" width="33%"><img src="https://img.shields.io/badge/🔍_OSINT-100%25-00d9ff?style=flat-square&labelColor=0d1117"/></td>
+<td align="center" width="33%"><img src="https://img.shields.io/badge/🎯_RED_TEAM-80%25-ffb800?style=flat-square&labelColor=0d1117"/></td>
+</tr>
+<tr>
+<td align="center"><img src="https://img.shields.io/badge/💥_EXPLOIT-80%25-ff5f7e?style=flat-square&labelColor=0d1117"/></td>
+<td align="center"><img src="https://img.shields.io/badge/📡_WIRELESS-60%25-b967ff?style=flat-square&labelColor=0d1117"/></td>
+<td align="center"><img src="https://img.shields.io/badge/🌍_WEBAPP-100%25-25D366?style=flat-square&labelColor=0d1117"/></td>
+</tr>
+</table>
+
+<sub><a href="#top">⬆️ Volver arriba</a></sub>
 
 </div>
 
@@ -218,6 +247,8 @@ Informes exportables, claros y listos para entregar al cliente.
 
 > [!NOTE]
 > El instalador descarga y configura automáticamente todas las dependencias necesarias durante la configuración inicial.
+
+<div align="center"><sub><a href="#top">⬆️ Volver arriba</a></sub></div>
 
 <a name="faq"></a>
 <div align="center">
@@ -258,10 +289,14 @@ bash uninstall.sh
 
 </details>
 
+<div align="center"><sub><a href="#top">⬆️ Volver arriba</a></sub></div>
+
 <a name="roadmap"></a>
 <div align="center">
 <img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,100:ff5f7e&height=90&section=header&text=🗺️%20ROADMAP&fontSize=28&fontColor=ff5f7e&fontAlignY=60&animation=fadeIn" width="100%"/>
 </div>
+
+<div align="center">
 
 - [x] Instalador automático one-shot
 - [x] Módulos de reconocimiento y OSINT
@@ -269,8 +304,10 @@ bash uninstall.sh
 - [ ] Integración con Docker
 - [ ] Soporte multi-distro (experimental)
 
-<div align="center">
 <img src="https://img.shields.io/badge/PROGRESO-40%25-ff5f7e?style=for-the-badge&labelColor=0d1117"/>
+
+<sub><a href="#top">⬆️ Volver arriba</a></sub>
+
 </div>
 
 <a name="redes"></a>
@@ -326,6 +363,10 @@ Los *pull requests* son bienvenidos. Para cambios grandes, abre primero un *issu
 **⭐ Si SOKIX te resulta útil, considera dejar una estrella en el repositorio**
 
 <sub>Construido por y para la comunidad de seguridad ofensiva</sub>
+
+<br><br>
+
+<sub><a href="#top">⬆️ Volver arriba</a></sub>
 
 </div>
 
