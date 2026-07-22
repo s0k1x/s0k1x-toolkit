@@ -27,33 +27,30 @@
   <a href="https://github.com/s0k1x/s0k1x-toolkit/network/members"><img src="https://img.shields.io/github/forks/s0k1x/s0k1x-toolkit?style=for-the-badge&color=39FF14&labelColor=0d1117&logo=github&logoColor=39FF14"/></a>
 </p>
 
-<p>
-  <a href="https://instagram.com/mariio.008__"><img src="https://img.shields.io/badge/Instagram-mariio.008__-E4405F?style=for-the-badge&logo=instagram&logoColor=white&labelColor=0d1117"/></a>
-  <a href="https://wa.me/34666962150"><img src="https://img.shields.io/badge/WhatsApp-%2B34%20666%2096%2021%2050-25D366?style=for-the-badge&logo=whatsapp&logoColor=white&labelColor=0d1117"/></a>
-</p>
-
 <br>
 
-<img src="https://img.shields.io/badge/⏱️_DE_CERO_A_OPERATIVO_EN_MENOS_DE_60_SEGUNDOS-0d1117?style=for-the-badge&color=1a1a2e"/>
+<img src="https://img.shields.io/badge/⏱️_DE_CERO_A_OPERATIVO_EN_MENOS_DE_60_SEGUNDOS-1a1a2e?style=for-the-badge&color=39FF14&labelColor=0d1117"/>
 
 <br><br>
 
-<!-- Navegación por píldoras — el color de cada una coincide con el acento de su sección -->
 <p>
-<a href="#instalacion"><img src="https://img.shields.io/badge/🚀_INSTALACIÓN-39FF14?style=for-the-badge&labelColor=0d1117"/></a>
-<a href="#caracteristicas"><img src="https://img.shields.io/badge/✨_CARACTERÍSTICAS-00d9ff?style=for-the-badge&labelColor=0d1117"/></a>
-<a href="#requisitos"><img src="https://img.shields.io/badge/📋_REQUISITOS-ffb800?style=for-the-badge&labelColor=0d1117"/></a>
-<a href="#faq"><img src="https://img.shields.io/badge/🧩_FAQ-b967ff?style=for-the-badge&labelColor=0d1117"/></a>
-<a href="#roadmap"><img src="https://img.shields.io/badge/🗺️_ROADMAP-ff5f7e?style=for-the-badge&labelColor=0d1117"/></a>
-<a href="#redes"><img src="https://img.shields.io/badge/📲_CONTACTO-25D366?style=for-the-badge&labelColor=0d1117"/></a>
+<a href="#arranque"><img src="https://img.shields.io/badge/⌁_ARRANQUE-0d1117?style=for-the-badge&color=39FF14&labelColor=0d1117"/></a>
+<a href="#arsenal"><img src="https://img.shields.io/badge/⬡_ARSENAL-0d1117?style=for-the-badge&color=39FF14&labelColor=0d1117"/></a>
+<a href="#entorno"><img src="https://img.shields.io/badge/⚙_ENTORNO-0d1117?style=for-the-badge&color=39FF14&labelColor=0d1117"/></a>
+<a href="#dudas"><img src="https://img.shields.io/badge/◆_DUDAS-0d1117?style=for-the-badge&color=39FF14&labelColor=0d1117"/></a>
+<a href="#evolucion"><img src="https://img.shields.io/badge/↝_EVOLUCIÓN-0d1117?style=for-the-badge&color=39FF14&labelColor=0d1117"/></a>
+<a href="#contacto"><img src="https://img.shields.io/badge/⌘_CONTACTO-0d1117?style=for-the-badge&color=39FF14&labelColor=0d1117"/></a>
 </p>
 
 </div>
 
-<a name="instalacion"></a>
+<a name="arranque"></a>
 <div align="center">
-<img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,100:39FF14&height=90&section=header&text=🚀%20INSTALACIÓN%20RÁPIDA&fontSize=28&fontColor=39FF14&fontAlignY=60&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,50:1a1a2e,100:0d1117&height=80&section=header&text=⌁%20ARRANQUE&fontSize=26&fontColor=39FF14&fontAlignY=60&animation=fadeIn" width="100%"/>
+<sub>De cero a operativo en menos de un minuto</sub>
 </div>
+
+<br>
 
 <div align="center">
 
@@ -63,46 +60,32 @@
 
 <table width="100%">
 <tr>
-<td width="18%" align="center">
-
-<img src="https://img.shields.io/badge/PASO-01-0d1117?style=for-the-badge&labelColor=39FF14"/>
-
-</td>
+<td width="14%" align="center"><img src="https://img.shields.io/badge/01-0d1117?style=for-the-badge&labelColor=39FF14"/></td>
 <td>
 
-**📥 Clona el repositorio**
+**Clona el repositorio**
 ```bash
 git clone https://github.com/s0k1x/s0k1x-toolkit.git
 ```
 
 </td>
 </tr>
-
 <tr>
-<td width="18%" align="center">
-
-<img src="https://img.shields.io/badge/PASO-02-0d1117?style=for-the-badge&labelColor=39FF14"/>
-
-</td>
+<td width="14%" align="center"><img src="https://img.shields.io/badge/02-0d1117?style=for-the-badge&labelColor=39FF14"/></td>
 <td>
 
-**📂 Accede al proyecto**
+**Accede al proyecto**
 ```bash
 cd s0k1x-toolkit
 ```
 
 </td>
 </tr>
-
 <tr>
-<td width="18%" align="center">
-
-<img src="https://img.shields.io/badge/PASO-03-0d1117?style=for-the-badge&labelColor=39FF14"/>
-
-</td>
+<td width="14%" align="center"><img src="https://img.shields.io/badge/03-0d1117?style=for-the-badge&labelColor=39FF14"/></td>
 <td>
 
-**⚙️ Ejecuta el instalador**
+**Ejecuta el instalador**
 ```bash
 bash install.sh
 ```
@@ -110,16 +93,11 @@ bash install.sh
 
 </td>
 </tr>
-
 <tr>
-<td width="18%" align="center">
-
-<img src="https://img.shields.io/badge/PASO-04-0d1117?style=for-the-badge&labelColor=39FF14"/>
-
-</td>
+<td width="14%" align="center"><img src="https://img.shields.io/badge/04-0d1117?style=for-the-badge&labelColor=39FF14"/></td>
 <td>
 
-**⚡ Lanza SOKIX**
+**Lanza SOKIX**
 ```bash
 sokix
 ```
@@ -155,45 +133,50 @@ git clone https://github.com/s0k1x/s0k1x-toolkit.git && cd s0k1x-toolkit && bash
 └──────────────────────────────────────────────────────────────┘
 ```
 
-<sub><a href="#top">⬆️ Volver arriba</a></sub>
+<sub><a href="#top">⬆ volver arriba</a></sub>
 
 </div>
 
-<a name="caracteristicas"></a>
+<br>
+
+<a name="arsenal"></a>
 <div align="center">
-<img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,100:00d9ff&height=90&section=header&text=✨%20CARACTERÍSTICAS&fontSize=28&fontColor=00d9ff&fontAlignY=60&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,50:1a1a2e,100:0d1117&height=80&section=header&text=⬡%20ARSENAL&fontSize=26&fontColor=39FF14&fontAlignY=60&animation=fadeIn" width="100%"/>
+<sub>Todo lo que trae SOKIX de fábrica</sub>
 </div>
+
+<br>
 
 <table>
 <tr>
 <td width="50%" valign="top">
 
-### 🌐 Reconocimiento avanzado
-Mapeo de superficie de ataque, descubrimiento de activos y enumeración automatizada.
+**🌐 Reconocimiento avanzado**
+<br>Mapeo de superficie de ataque, descubrimiento de activos y enumeración automatizada.
 
-### 🔍 Inteligencia OSINT
-Recolección y correlación de fuentes abiertas para construir perfiles de objetivo.
+**🔍 Inteligencia OSINT**
+<br>Recolección y correlación de fuentes abiertas para construir perfiles de objetivo.
 
-### 🎯 Red Team Operations
-Simulación de adversarios reales con playbooks tácticos listos para usar.
+**🎯 Red Team Operations**
+<br>Simulación de adversarios reales con playbooks tácticos listos para usar.
 
-### 💥 Exploitation & Post-Exploitation
-Cadenas de explotación y persistencia en entornos controlados.
+**💥 Exploitation & Post-Exploitation**
+<br>Cadenas de explotación y persistencia en entornos controlados.
 
 </td>
 <td width="50%" valign="top">
 
-### 📡 Seguridad Wireless
-Auditoría de redes inalámbricas y protocolos asociados.
+**📡 Seguridad Wireless**
+<br>Auditoría de redes inalámbricas y protocolos asociados.
 
-### 🌍 Web App Security Testing
-Detección de vulnerabilidades en aplicaciones y APIs web.
+**🌍 Web App Security Testing**
+<br>Detección de vulnerabilidades en aplicaciones y APIs web.
 
-### ⚡ Automatización de seguridad
-Flujos de trabajo encadenados para reducir tareas repetitivas.
+**⚡ Automatización de seguridad**
+<br>Flujos de trabajo encadenados para reducir tareas repetitivas.
 
-### 📊 Reportes profesionales
-Informes exportables, claros y listos para entregar al cliente.
+**📊 Reportes profesionales**
+<br>Informes exportables, claros y listos para entregar al cliente.
 
 </td>
 </tr>
@@ -205,25 +188,30 @@ Informes exportables, claros y listos para entregar al cliente.
 
 <table>
 <tr>
-<td align="center" width="33%"><img src="https://img.shields.io/badge/🌐_RECON-100%25-39FF14?style=flat-square&labelColor=0d1117"/></td>
-<td align="center" width="33%"><img src="https://img.shields.io/badge/🔍_OSINT-100%25-00d9ff?style=flat-square&labelColor=0d1117"/></td>
-<td align="center" width="33%"><img src="https://img.shields.io/badge/🎯_RED_TEAM-80%25-ffb800?style=flat-square&labelColor=0d1117"/></td>
+<td align="center" width="33%"><img src="https://img.shields.io/badge/RECON-100%25-39FF14?style=flat-square&labelColor=0d1117"/></td>
+<td align="center" width="33%"><img src="https://img.shields.io/badge/OSINT-100%25-39FF14?style=flat-square&labelColor=0d1117"/></td>
+<td align="center" width="33%"><img src="https://img.shields.io/badge/WEBAPP-100%25-39FF14?style=flat-square&labelColor=0d1117"/></td>
 </tr>
 <tr>
-<td align="center"><img src="https://img.shields.io/badge/💥_EXPLOIT-80%25-ff5f7e?style=flat-square&labelColor=0d1117"/></td>
-<td align="center"><img src="https://img.shields.io/badge/📡_WIRELESS-60%25-b967ff?style=flat-square&labelColor=0d1117"/></td>
-<td align="center"><img src="https://img.shields.io/badge/🌍_WEBAPP-100%25-25D366?style=flat-square&labelColor=0d1117"/></td>
+<td align="center"><img src="https://img.shields.io/badge/RED_TEAM-80%25-2fd647?style=flat-square&labelColor=0d1117"/></td>
+<td align="center"><img src="https://img.shields.io/badge/EXPLOIT-80%25-2fd647?style=flat-square&labelColor=0d1117"/></td>
+<td align="center"><img src="https://img.shields.io/badge/WIRELESS-60%25-6c9a72?style=flat-square&labelColor=0d1117"/></td>
 </tr>
 </table>
 
-<sub><a href="#top">⬆️ Volver arriba</a></sub>
+<sub><a href="#top">⬆ volver arriba</a></sub>
 
 </div>
 
-<a name="requisitos"></a>
+<br>
+
+<a name="entorno"></a>
 <div align="center">
-<img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,100:ffb800&height=90&section=header&text=📋%20REQUISITOS%20DEL%20SISTEMA&fontSize=28&fontColor=ffb800&fontAlignY=60&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,50:1a1a2e,100:0d1117&height=80&section=header&text=⚙%20ENTORNO&fontSize=26&fontColor=39FF14&fontAlignY=60&animation=fadeIn" width="100%"/>
+<sub>Lo que necesitas antes de instalar</sub>
 </div>
+
+<br>
 
 <div align="center">
 
@@ -248,27 +236,32 @@ Informes exportables, claros y listos para entregar al cliente.
 > [!NOTE]
 > El instalador descarga y configura automáticamente todas las dependencias necesarias durante la configuración inicial.
 
-<div align="center"><sub><a href="#top">⬆️ Volver arriba</a></sub></div>
+<div align="center"><sub><a href="#top">⬆ volver arriba</a></sub></div>
 
-<a name="faq"></a>
+<br>
+
+<a name="dudas"></a>
 <div align="center">
-<img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,100:b967ff&height=90&section=header&text=🧩%20PREGUNTAS%20FRECUENTES&fontSize=28&fontColor=b967ff&fontAlignY=60&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,50:1a1a2e,100:0d1117&height=80&section=header&text=◆%20DUDAS&fontSize=26&fontColor=39FF14&fontAlignY=60&animation=fadeIn" width="100%"/>
+<sub>Preguntas frecuentes</sub>
 </div>
 
+<br>
+
 <details>
-<summary><b>❓ ¿Puedo instalarlo en otra distribución que no sea Kali?</b></summary>
+<summary><b>¿Puedo instalarlo en otra distribución que no sea Kali?</b></summary>
 <br>
 No es una configuración soportada oficialmente. SOKIX depende de herramientas y librerías que vienen preinstaladas o preconfiguradas en Kali Linux.
 </details>
 
 <details>
-<summary><b>❓ El comando <code>sokix</code> no funciona después de instalar</b></summary>
+<summary><b>El comando <code>sokix</code> no funciona después de instalar</b></summary>
 <br>
 Reinicia tu terminal o ejecuta <code>source ~/.bashrc</code>. Si el problema persiste, usa <code>./sokix</code> directamente desde la carpeta del proyecto.
 </details>
 
 <details>
-<summary><b>❓ ¿Cómo actualizo a la última versión?</b></summary>
+<summary><b>¿Cómo actualizo a la última versión?</b></summary>
 <br>
 
 ```bash
@@ -280,7 +273,7 @@ bash install.sh
 </details>
 
 <details>
-<summary><b>❓ ¿Cómo desinstalo SOKIX?</b></summary>
+<summary><b>¿Cómo desinstalo SOKIX?</b></summary>
 <br>
 
 ```bash
@@ -289,12 +282,17 @@ bash uninstall.sh
 
 </details>
 
-<div align="center"><sub><a href="#top">⬆️ Volver arriba</a></sub></div>
+<div align="center"><sub><a href="#top">⬆ volver arriba</a></sub></div>
 
-<a name="roadmap"></a>
+<br>
+
+<a name="evolucion"></a>
 <div align="center">
-<img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,100:ff5f7e&height=90&section=header&text=🗺️%20ROADMAP&fontSize=28&fontColor=ff5f7e&fontAlignY=60&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,50:1a1a2e,100:0d1117&height=80&section=header&text=↝%20EVOLUCIÓN&fontSize=26&fontColor=39FF14&fontAlignY=60&animation=fadeIn" width="100%"/>
+<sub>Hacia dónde va SOKIX</sub>
 </div>
+
+<br>
 
 <div align="center">
 
@@ -304,16 +302,21 @@ bash uninstall.sh
 - [ ] Integración con Docker
 - [ ] Soporte multi-distro (experimental)
 
-<img src="https://img.shields.io/badge/PROGRESO-40%25-ff5f7e?style=for-the-badge&labelColor=0d1117"/>
+<img src="https://img.shields.io/badge/PROGRESO-40%25-39FF14?style=for-the-badge&labelColor=0d1117"/>
 
-<sub><a href="#top">⬆️ Volver arriba</a></sub>
+<sub><a href="#top">⬆ volver arriba</a></sub>
 
 </div>
 
-<a name="redes"></a>
+<br>
+
+<a name="contacto"></a>
 <div align="center">
-<img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,100:25D366&height=90&section=header&text=📲%20CONTACTO%20%26%20REDES&fontSize=28&fontColor=25D366&fontAlignY=60&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,50:1a1a2e,100:0d1117&height=80&section=header&text=⌘%20CONTACTO&fontSize=26&fontColor=39FF14&fontAlignY=60&animation=fadeIn" width="100%"/>
+<sub>Sígueme y escríbeme</sub>
 </div>
+
+<br>
 
 <div align="center">
 
@@ -321,28 +324,20 @@ bash uninstall.sh
 <tr>
 <td align="center" width="50%">
 
-**Instagram**
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=12&bgcolor=0d1117&color=39FF14&data=https://instagram.com/mariio.008__" width="130"/>
 
-<a href="https://instagram.com/mariio.008__">
-<img src="https://img.shields.io/badge/-mariio.008__-E4405F?style=for-the-badge&logo=instagram&logoColor=white" width="220"/>
-</a>
+<br>
 
-<br><br>
-
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&color=0d1117&bgcolor=39FF14&data=https://instagram.com/mariio.008__" width="110"/>
+<a href="https://instagram.com/mariio.008__"><img src="https://img.shields.io/badge/Instagram-@mariio.008__-0d1117?style=for-the-badge&logo=instagram&logoColor=39FF14&color=39FF14&labelColor=0d1117"/></a>
 
 </td>
 <td align="center" width="50%">
 
-**WhatsApp**
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=12&bgcolor=0d1117&color=39FF14&data=https://wa.me/34666962150" width="130"/>
 
-<a href="https://wa.me/34666962150">
-<img src="https://img.shields.io/badge/%2B34%20666%2096%2021%2050-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" width="220"/>
-</a>
+<br>
 
-<br><br>
-
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&color=0d1117&bgcolor=39FF14&data=https://wa.me/34666962150" width="110"/>
+<a href="https://wa.me/34666962150"><img src="https://img.shields.io/badge/WhatsApp-%2B34%20666%2096%2021%2050-0d1117?style=for-the-badge&logo=whatsapp&logoColor=39FF14&color=39FF14&labelColor=0d1117"/></a>
 
 </td>
 </tr>
@@ -366,7 +361,7 @@ Los *pull requests* son bienvenidos. Para cambios grandes, abre primero un *issu
 
 <br><br>
 
-<sub><a href="#top">⬆️ Volver arriba</a></sub>
+<sub><a href="#top">⬆ volver arriba</a></sub>
 
 </div>
 
