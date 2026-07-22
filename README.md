@@ -1,50 +1,54 @@
 <div align="center">
 
-```
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃                                                                   ┃
-┃    ███████╗ ██████╗ ██╗  ██╗██╗██╗  ██╗                          ┃
-┃    ██╔════╝██╔═══██╗██║ ██╔╝██║╚██╗██╔╝                          ┃
-┃    ███████╗██║   ██║█████╔╝ ██║ ╚███╔╝                           ┃
-┃    ╚════██║██║   ██║██╔═██╗ ██║ ██╔██╗                           ┃
-┃    ███████║╚██████╔╝██║  ██╗██║██╔╝ ██╗                          ┃
-┃    ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝                          ┃
-┃                                                                   ┃
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-```
-
-### `PROFESSIONAL OFFENSIVE SECURITY FRAMEWORK`
-
-[![Typing SVG](https://readme-typing-svg.demolab.com/?font=Fira+Code&size=20&pause=1000&color=39FF14&center=true&vCenter=true&width=560&lines=Reconnaissance+%2B+OSINT+%2B+Red+Team;Exploitation+%26+Post-Exploitation;Built+exclusively+for+Kali+Linux)](#)
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:1a1a2e,100:0d1117&height=220&section=header&text=S%20O%20K%20I%20X&fontSize=70&fontColor=39FF14&fontAlignY=38&desc=Professional%20Offensive%20Security%20Framework&descAlignY=58&descSize=18&animation=fadeIn" width="100%"/>
 
 <br>
 
-[![Kali Linux](https://img.shields.io/badge/PLATFORM-Kali%20Linux-39FF14?style=for-the-badge&logo=kalilinux&logoColor=39FF14&labelColor=0d1117)](https://www.kali.org/)
-[![Python](https://img.shields.io/badge/PYTHON-3.11%2B-39FF14?style=for-the-badge&logo=python&logoColor=39FF14&labelColor=0d1117)](https://www.python.org/)
-[![Bash](https://img.shields.io/badge/BASH-5.0%2B-39FF14?style=for-the-badge&logo=gnubash&logoColor=39FF14&labelColor=0d1117)](https://www.gnu.org/software/bash/)
-[![License](https://img.shields.io/badge/LICENSE-MIT-39FF14?style=for-the-badge&labelColor=0d1117)](#)
+[![Typing SVG](https://readme-typing-svg.demolab.com/?font=Fira+Code&weight=600&size=22&duration=3000&pause=800&color=39FF14&center=true&vCenter=true&width=650&lines=Reconnaissance+%2B+OSINT+%2B+Red+Team;Exploitation+%26+Post-Exploitation;Wireless+%2B+Web+App+Security;Built+exclusively+for+Kali+Linux)](#)
 
-[![Stars](https://img.shields.io/github/stars/s0k1x/s0k1x-toolkit?style=for-the-badge&color=39FF14&labelColor=0d1117&logo=github&logoColor=39FF14)](https://github.com/s0k1x/s0k1x-toolkit/stargazers)
-[![Issues](https://img.shields.io/github/issues/s0k1x/s0k1x-toolkit?style=for-the-badge&color=39FF14&labelColor=0d1117&logo=github&logoColor=39FF14)](https://github.com/s0k1x/s0k1x-toolkit/issues)
-[![Maintained](https://img.shields.io/badge/MAINTAINED-YES-39FF14?style=for-the-badge&labelColor=0d1117)](#)
-[![Instagram](https://img.shields.io/badge/INSTAGRAM-mariio.008__-39FF14?style=for-the-badge&logo=instagram&logoColor=39FF14&labelColor=0d1117)](https://instagram.com/mariio.008__)
+<img src="https://raw.githubusercontent.com/Platane/snk/output/github-contribution-grid-snake-dark.svg" width="0" height="0"/>
+
+<p>
+  <img src="https://img.shields.io/badge/STATUS-ACTIVE-39FF14?style=for-the-badge&labelColor=0d1117"/>
+  <img src="https://img.shields.io/badge/VERSION-2.0.0-39FF14?style=for-the-badge&labelColor=0d1117"/>
+  <img src="https://img.shields.io/badge/BUILD-PASSING-39FF14?style=for-the-badge&labelColor=0d1117"/>
+</p>
+
+<p>
+  <a href="https://www.kali.org/"><img src="https://img.shields.io/badge/PLATFORM-Kali%20Linux-39FF14?style=for-the-badge&logo=kalilinux&logoColor=39FF14&labelColor=0d1117"/></a>
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/PYTHON-3.11%2B-39FF14?style=for-the-badge&logo=python&logoColor=39FF14&labelColor=0d1117"/></a>
+  <a href="https://www.gnu.org/software/bash/"><img src="https://img.shields.io/badge/BASH-5.0%2B-39FF14?style=for-the-badge&logo=gnubash&logoColor=39FF14&labelColor=0d1117"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/LICENSE-MIT-39FF14?style=for-the-badge&labelColor=0d1117"/></a>
+</p>
+
+<p>
+  <a href="https://github.com/s0k1x/s0k1x-toolkit/stargazers"><img src="https://img.shields.io/github/stars/s0k1x/s0k1x-toolkit?style=for-the-badge&color=39FF14&labelColor=0d1117&logo=github&logoColor=39FF14"/></a>
+  <a href="https://github.com/s0k1x/s0k1x-toolkit/issues"><img src="https://img.shields.io/github/issues/s0k1x/s0k1x-toolkit?style=for-the-badge&color=39FF14&labelColor=0d1117&logo=github&logoColor=39FF14"/></a>
+  <a href="https://github.com/s0k1x/s0k1x-toolkit/network/members"><img src="https://img.shields.io/github/forks/s0k1x/s0k1x-toolkit?style=for-the-badge&color=39FF14&labelColor=0d1117&logo=github&logoColor=39FF14"/></a>
+</p>
+
+<p>
+  <a href="https://instagram.com/mariio.008__"><img src="https://img.shields.io/badge/Instagram-mariio.008__-E4405F?style=for-the-badge&logo=instagram&logoColor=white&labelColor=0d1117"/></a>
+</p>
 
 <br>
 
-**⏱️ De cero a operativo en menos de 60 segundos**
+<img src="https://img.shields.io/badge/⏱️_DE_CERO_A_OPERATIVO_EN_MENOS_DE_60_SEGUNDOS-0d1117?style=for-the-badge&color=1a1a2e"/>
 
-<a href="#instalacion">🚀 Instalación</a> •
-<a href="#caracteristicas">✨ Características</a> •
-<a href="#requisitos">📋 Requisitos</a> •
-<a href="#faq">🧩 FAQ</a> •
-<a href="#roadmap">🗺️ Roadmap</a> •
-<a href="#redes">📡 Redes</a>
+<br><br>
+
+<p>
+<a href="#instalacion"><b>🚀 Instalación</b></a> &nbsp;|&nbsp;
+<a href="#caracteristicas"><b>✨ Características</b></a> &nbsp;|&nbsp;
+<a href="#requisitos"><b>📋 Requisitos</b></a> &nbsp;|&nbsp;
+<a href="#faq"><b>🧩 FAQ</b></a> &nbsp;|&nbsp;
+<a href="#roadmap"><b>🗺️ Roadmap</b></a> &nbsp;|&nbsp;
+<a href="#redes"><b>📡 Redes</b></a>
+</p>
 
 </div>
 
-<br>
-
----
+<img src="https://capsule-render.vercel.app/api?type=transparent&color=39FF14&height=2&section=header" width="100%"/>
 
 <a name="instalacion"></a>
 ## 🚀 Instalación rápida
@@ -71,7 +75,7 @@
 </div>
 
 <table>
-<tr><td width="70" align="center"><h3>01</h3></td>
+<tr><td width="70" align="center"><h2>01</h2></td>
 <td>
 
 **📥 Clona el repositorio**
@@ -80,7 +84,7 @@ git clone https://github.com/s0k1x/s0k1x-toolkit.git
 ```
 </td></tr>
 
-<tr><td align="center"><h3>02</h3></td>
+<tr><td align="center"><h2>02</h2></td>
 <td>
 
 **📂 Accede al proyecto**
@@ -89,7 +93,7 @@ cd s0k1x-toolkit
 ```
 </td></tr>
 
-<tr><td align="center"><h3>03</h3></td>
+<tr><td align="center"><h2>03</h2></td>
 <td>
 
 **⚙️ Ejecuta el instalador**
@@ -100,7 +104,7 @@ bash install.sh
 
 </td></tr>
 
-<tr><td align="center"><h3>04</h3></td>
+<tr><td align="center"><h2>04</h2></td>
 <td>
 
 **⚡ Lanza SOKIX**
@@ -112,7 +116,7 @@ sokix
 </td></tr>
 </table>
 
----
+<img src="https://capsule-render.vercel.app/api?type=transparent&color=39FF14&height=2&section=header" width="100%"/>
 
 <a name="caracteristicas"></a>
 ## ✨ Características
@@ -152,7 +156,15 @@ Informes exportables, claros y listos para entregar al cliente.
 </tr>
 </table>
 
----
+<div align="center">
+
+| 🌐 Recon | 🔍 OSINT | 🎯 Red Team | 💥 Exploit | 📡 Wireless | 🌍 WebApp |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| ●●●●● | ●●●●● | ●●●●○ | ●●●●○ | ●●●○○ | ●●●●● |
+
+</div>
+
+<img src="https://capsule-render.vercel.app/api?type=transparent&color=39FF14&height=2&section=header" width="100%"/>
 
 <a name="requisitos"></a>
 ## 📋 Requisitos del sistema
@@ -169,7 +181,7 @@ Informes exportables, claros y listos para entregar al cliente.
 
 </div>
 
----
+<br>
 
 > [!IMPORTANT]
 > **SOKIX Toolkit** está diseñado **exclusivamente para Kali Linux**, garantizando máxima compatibilidad, estabilidad y rendimiento entre todas las herramientas integradas.
@@ -180,7 +192,7 @@ Informes exportables, claros y listos para entregar al cliente.
 > [!NOTE]
 > El instalador descarga y configura automáticamente todas las dependencias necesarias durante la configuración inicial.
 
----
+<img src="https://capsule-render.vercel.app/api?type=transparent&color=39FF14&height=2&section=header" width="100%"/>
 
 <a name="faq"></a>
 ## 🧩 Preguntas frecuentes
@@ -219,7 +231,7 @@ bash uninstall.sh
 
 </details>
 
----
+<img src="https://capsule-render.vercel.app/api?type=transparent&color=39FF14&height=2&section=header" width="100%"/>
 
 <a name="roadmap"></a>
 ## 🗺️ Roadmap
@@ -230,18 +242,24 @@ bash uninstall.sh
 - [ ] Integración con Docker
 - [ ] Soporte multi-distro (experimental)
 
----
+<div align="center">
+<img src="https://img.shields.io/badge/PROGRESO-40%25-39FF14?style=for-the-badge&labelColor=0d1117"/>
+</div>
+
+<img src="https://capsule-render.vercel.app/api?type=transparent&color=39FF14&height=2&section=header" width="100%"/>
 
 <a name="redes"></a>
 <div align="center">
 
-### 📡 Sígueme
+## 📡 Sígueme
 
-[![Instagram](https://img.shields.io/badge/-mariio.008__-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/mariio.008__)
+<a href="https://instagram.com/mariio.008__">
+<img src="https://img.shields.io/badge/-mariio.008__-E4405F?style=for-the-badge&logo=instagram&logoColor=white" width="220"/>
+</a>
 
 </div>
 
----
+<br>
 
 <div align="center">
 
@@ -249,10 +267,12 @@ bash uninstall.sh
 
 Los *pull requests* son bienvenidos. Para cambios grandes, abre primero un *issue* para discutir qué te gustaría modificar.
 
-[![Made with Bash](https://img.shields.io/badge/MADE%20WITH-BASH%20%26%20PYTHON-39FF14?style=for-the-badge&labelColor=0d1117)](#)
+<img src="https://img.shields.io/badge/MADE%20WITH-BASH%20%26%20PYTHON-39FF14?style=for-the-badge&labelColor=0d1117"/>
 
 **⭐ Si SOKIX te resulta útil, considera dejar una estrella en el repositorio**
 
 <sub>Construido por y para la comunidad de seguridad ofensiva</sub>
 
 </div>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:1a1a2e,100:0d1117&height=120&section=footer" width="100%"/>
