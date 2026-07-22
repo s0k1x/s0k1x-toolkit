@@ -1,58 +1,48 @@
 # ⚡ Installation
 
-Deploy **SOKIX Toolkit** in **less than 60 seconds** and gain access to a powerful offensive security framework that unifies dozens of industry-standard penetration testing tools into a single, intuitive interface.
-
-Built exclusively for **Kali Linux**, SOKIX automates dependency management, tool installation, updates, environment configuration, and workspace preparation—allowing you to focus on security assessments instead of manual setup.
+Get **SOKIX Toolkit** up and running in **under 60 seconds**.
 
 ---
 
-## 🚀 Quick Installation
-
-### 1. Clone the Repository
+## 1. Clone the Repository
 
 ```bash
 git clone https://github.com/s0k1x/s0k1x-toolkit.git
 ```
 
-### 2. Enter the Directory
+## 2. Navigate to the Project
 
 ```bash
 cd s0k1x-toolkit
 ```
 
-### 3. Launch the Installer
+## 3. Install SOKIX
 
 ```bash
-bash sokix-toolkit
+bash install.sh
 ```
 
-If elevated privileges are required:
+If your system requires elevated privileges:
 
 ```bash
-sudo bash sokix-toolkit
+sudo bash install.sh
+```
+
+## 4. Launch SOKIX
+
+```bash
+sokix
+```
+
+If the command is not yet available in your **PATH**, run it directly:
+
+```bash
+./sokix
 ```
 
 ---
 
-## ⚙️ During Installation
-
-The installer automatically performs every required task, including:
-
-- ✔️ Verifies operating system compatibility
-- ✔️ Detects installed packages
-- ✔️ Downloads missing dependencies
-- ✔️ Installs and updates supported security tools
-- ✔️ Configures Python environments
-- ✔️ Creates the SOKIX launcher
-- ✔️ Generates the required workspace
-- ✔️ Optimizes the execution environment
-- ✔️ Performs post-installation integrity checks
-
-No manual configuration is necessary.
-
----
-
-# ✅ Installation Successful
+# ✅ Installation Complete
 
 ```text
 ╔════════════════════════════════════════════════════════════╗
@@ -69,62 +59,18 @@ No manual configuration is necessary.
 ╚════════════════════════════════════════════════════════════╝
 ```
 
----
+Your installation is complete. SOKIX is now ready to use.
 
-# 🚀 What's Included
+## 🚀 Features
 
-SOKIX centralizes dozens of professional offensive security tools into a single environment.
-
-### 🌐 Reconnaissance
-
-- Nmap
-- Masscan
-- Amass
-- Assetfinder
-- Subfinder
-- DNSX
-
-### 🔎 OSINT
-
-- TheHarvester
-- Sherlock
-- Holehe
-- PhoneInfoga
-
-### 🌍 Web Application Testing
-
-- Nuclei
-- FFUF
-- Gobuster
-- Dirsearch
-- WhatWeb
-- Nikto
-
-### 💥 Exploitation
-
-- Metasploit Framework
-- SQLMap
-- SearchSploit
-
-### 🔐 Password Auditing
-
-- Hashcat
-- John the Ripper
-- Hydra
-
-### 📡 Wireless Security
-
-- Aircrack-ng Suite
-- Bettercap
-- Reaver
-
-### ⚡ Automation
-
-- Automatic updates
-- Integrated workspaces
-- Module launcher
-- Tool verification
-- Report generation
+- 🌐 Advanced Reconnaissance
+- 🔍 OSINT Intelligence Gathering
+- 🎯 Red Team Operations
+- 💥 Exploitation & Post-Exploitation
+- 📡 Wireless Security Assessments
+- 🌍 Web Application Security Testing
+- ⚡ Security Automation
+- 📊 Professional Report Generation
 
 ---
 
@@ -132,32 +78,19 @@ SOKIX centralizes dozens of professional offensive security tools into a single 
 
 | Component | Requirement |
 |-----------|-------------|
-| Operating System | Kali Linux (Latest) |
-| Bash | 5.0+ |
-| Python | 3.11+ |
-| Git | Latest Stable |
-| RAM | 4 GB Minimum (8 GB Recommended) |
-| Storage | 3 GB Free Space |
-| Internet | Required During Installation |
-
----
-
-## ⭐ Why SOKIX?
-
-Unlike traditional tool collections, **SOKIX** provides a unified workflow where reconnaissance, enumeration, exploitation, OSINT, wireless auditing, automation, and reporting are accessible from a single interface.
-
-Instead of manually installing and maintaining dozens of independent utilities, SOKIX handles installation, updates, dependency resolution, and environment configuration automatically.
+| Operating System | Kali Linux (Latest Release) |
+| Bash | 5.0 or newer |
+| Python | 3.11 or newer |
+| Git | Latest Stable Release |
+| Internet | Required during initial installation |
 
 ---
 
 > [!IMPORTANT]
-> SOKIX is developed **exclusively for Kali Linux** to guarantee maximum compatibility, stability, and performance across every integrated module.
+> **SOKIX Toolkit** is designed **exclusively for Kali Linux** to ensure maximum compatibility, stability, and performance across all integrated offensive security tools.
 
 > [!TIP]
-> The installer automatically detects existing tools and only installs what is missing, reducing installation time and avoiding unnecessary downloads.
+> After installation, restart your terminal if the `sokix` command is not immediately recognized.
 
 > [!NOTE]
-> The complete installation typically finishes in **under one minute**, depending on your internet connection.
-
-> [!WARNING]
-> This toolkit is intended exclusively for **authorized penetration testing, cybersecurity research, Capture The Flag (CTF) environments, and educational purposes**. Unauthorized use against systems you do not own or have explicit permission to test may violate applicable laws.
+> The installer automatically downloads and configures all required dependencies during the initial setup.
