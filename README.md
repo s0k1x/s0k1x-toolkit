@@ -366,3 +366,4 @@ Los *pull requests* son bienvenidos. Para cambios grandes, abre primero un *issu
 </div>
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:1a1a2e,100:0d1117&height=120&section=footer" width="100%"/>
+
