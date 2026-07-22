@@ -1,51 +1,58 @@
 # ⚡ Installation
 
-Deploy **SOKIX Toolkit** in **under 60 seconds** and start using a complete offensive security toolkit designed for **penetration testers**, **red team operators**, **bug bounty hunters**, and **cybersecurity enthusiasts**.
+Deploy **SOKIX Toolkit** in **less than 60 seconds** and gain access to a powerful offensive security framework that unifies dozens of industry-standard penetration testing tools into a single, intuitive interface.
 
-SOKIX automatically installs, updates, and configures every required dependency, providing a ready-to-use environment with a single command.
+Built exclusively for **Kali Linux**, SOKIX automates dependency management, tool installation, updates, environment configuration, and workspace preparation—allowing you to focus on security assessments instead of manual setup.
 
 ---
 
-## 1. Clone the Repository
+## 🚀 Quick Installation
+
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/s0k1x/s0k1x-toolkit.git
 ```
 
-## 2. Enter the Project Directory
+### 2. Enter the Directory
 
 ```bash
 cd s0k1x-toolkit
 ```
 
-## 3. Install SOKIX
-
-Simply execute:
+### 3. Launch the Installer
 
 ```bash
 bash sokix-toolkit
 ```
 
-If administrator privileges are required:
+If elevated privileges are required:
 
 ```bash
 sudo bash sokix-toolkit
 ```
 
-The installer will automatically:
+---
 
-- ✅ Verify system compatibility
-- ✅ Install all required dependencies
-- ✅ Download the latest components
-- ✅ Configure the environment
-- ✅ Create the SOKIX launcher
-- ✅ Perform automatic integrity checks
+## ⚙️ During Installation
 
-No manual configuration is required.
+The installer automatically performs every required task, including:
+
+- ✔️ Verifies operating system compatibility
+- ✔️ Detects installed packages
+- ✔️ Downloads missing dependencies
+- ✔️ Installs and updates supported security tools
+- ✔️ Configures Python environments
+- ✔️ Creates the SOKIX launcher
+- ✔️ Generates the required workspace
+- ✔️ Optimizes the execution environment
+- ✔️ Performs post-installation integrity checks
+
+No manual configuration is necessary.
 
 ---
 
-# ✅ Installation Complete
+# ✅ Installation Successful
 
 ```text
 ╔════════════════════════════════════════════════════════════╗
@@ -62,70 +69,95 @@ No manual configuration is required.
 ╚════════════════════════════════════════════════════════════╝
 ```
 
-SOKIX has been successfully installed and is ready to perform professional offensive security assessments.
-
 ---
 
-# 🚀 Included Capabilities
+# 🚀 What's Included
 
-SOKIX integrates dozens of industry-standard tools into a single interface, including technologies such as:
+SOKIX centralizes dozens of professional offensive security tools into a single environment.
 
-- 🌐 Advanced Reconnaissance
-- 🔍 OSINT Intelligence Gathering
-- 🎯 Red Team Operations
-- 💥 Exploitation & Post-Exploitation
-- 📡 Wireless Security Assessments
-- 🌍 Web Application Testing
-- 🔐 Password Auditing
-- 📁 Directory & Subdomain Enumeration
-- ⚡ Security Automation
-- 📊 Professional Report Generation
-
-### Built-in Tools
-
-Some of the integrated tools include:
+### 🌐 Reconnaissance
 
 - Nmap
+- Masscan
 - Amass
-- Subfinder
 - Assetfinder
+- Subfinder
+- DNSX
+
+### 🔎 OSINT
+
+- TheHarvester
+- Sherlock
+- Holehe
+- PhoneInfoga
+
+### 🌍 Web Application Testing
+
+- Nuclei
 - FFUF
 - Gobuster
-- Nuclei
-- SQLMap
-- Hydra
-- Hashcat
-- Aircrack-ng
-- John the Ripper
+- Dirsearch
 - WhatWeb
 - Nikto
-- Metasploit Framework
 
-…and many more.
+### 💥 Exploitation
+
+- Metasploit Framework
+- SQLMap
+- SearchSploit
+
+### 🔐 Password Auditing
+
+- Hashcat
+- John the Ripper
+- Hydra
+
+### 📡 Wireless Security
+
+- Aircrack-ng Suite
+- Bettercap
+- Reaver
+
+### ⚡ Automation
+
+- Automatic updates
+- Integrated workspaces
+- Module launcher
+- Tool verification
+- Report generation
 
 ---
 
-# 📋 Minimum Requirements
+# 📋 System Requirements
 
 | Component | Requirement |
 |-----------|-------------|
-| Operating System | Kali Linux (Latest Release) |
+| Operating System | Kali Linux (Latest) |
 | Bash | 5.0+ |
 | Python | 3.11+ |
 | Git | Latest Stable |
-| RAM | 4 GB minimum (8 GB recommended) |
-| Internet | Required during first installation |
+| RAM | 4 GB Minimum (8 GB Recommended) |
+| Storage | 3 GB Free Space |
+| Internet | Required During Installation |
+
+---
+
+## ⭐ Why SOKIX?
+
+Unlike traditional tool collections, **SOKIX** provides a unified workflow where reconnaissance, enumeration, exploitation, OSINT, wireless auditing, automation, and reporting are accessible from a single interface.
+
+Instead of manually installing and maintaining dozens of independent utilities, SOKIX handles installation, updates, dependency resolution, and environment configuration automatically.
 
 ---
 
 > [!IMPORTANT]
-> **SOKIX Toolkit** is developed **exclusively for Kali Linux**, ensuring maximum compatibility, stability, and performance across every integrated module.
+> SOKIX is developed **exclusively for Kali Linux** to guarantee maximum compatibility, stability, and performance across every integrated module.
 
 > [!TIP]
-> The installer automatically downloads missing packages, configures the environment, and keeps the toolkit organized with minimal user interaction.
+> The installer automatically detects existing tools and only installs what is missing, reducing installation time and avoiding unnecessary downloads.
 
 > [!NOTE]
-> Depending on your internet connection, the installation usually completes in **less than one minute**.
+> The complete installation typically finishes in **under one minute**, depending on your internet connection.
 
 > [!WARNING]
-> SOKIX is intended **only for authorized security assessments, educational purposes, and legal penetration testing**. Users are solely responsible for complying with all applicable laws and regulations.
+> This toolkit is intended exclusively for **authorized penetration testing, cybersecurity research, Capture The Flag (CTF) environments, and educational purposes**. Unauthorized use against systems you do not own or have explicit permission to test may violate applicable laws.
