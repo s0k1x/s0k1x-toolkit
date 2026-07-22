@@ -6,12 +6,11 @@
 
 [![Typing SVG](https://readme-typing-svg.demolab.com/?font=Fira+Code&weight=600&size=22&duration=3000&pause=800&color=39FF14&center=true&vCenter=true&width=650&lines=Reconnaissance+%2B+OSINT+%2B+Red+Team;Exploitation+%26+Post-Exploitation;Wireless+%2B+Web+App+Security;Built+exclusively+for+Kali+Linux)](#)
 
-<img src="https://raw.githubusercontent.com/Platane/snk/output/github-contribution-grid-snake-dark.svg" width="0" height="0"/>
-
 <p>
   <img src="https://img.shields.io/badge/STATUS-ACTIVE-39FF14?style=for-the-badge&labelColor=0d1117"/>
   <img src="https://img.shields.io/badge/VERSION-2.0.0-39FF14?style=for-the-badge&labelColor=0d1117"/>
   <img src="https://img.shields.io/badge/BUILD-PASSING-39FF14?style=for-the-badge&labelColor=0d1117"/>
+  <img src="https://komarev.com/ghpvc/?username=s0k1x&color=39FF14&style=for-the-badge&label=VISITAS"/>
 </p>
 
 <p>
@@ -29,6 +28,7 @@
 
 <p>
   <a href="https://instagram.com/mariio.008__"><img src="https://img.shields.io/badge/Instagram-mariio.008__-E4405F?style=for-the-badge&logo=instagram&logoColor=white&labelColor=0d1117"/></a>
+  <a href="https://wa.me/34666962150"><img src="https://img.shields.io/badge/WhatsApp-%2B34%20666%2096%2021%2050-25D366?style=for-the-badge&logo=whatsapp&logoColor=white&labelColor=0d1117"/></a>
 </p>
 
 <br>
@@ -43,15 +43,89 @@
 <a href="#requisitos"><b>📋 Requisitos</b></a> &nbsp;|&nbsp;
 <a href="#faq"><b>🧩 FAQ</b></a> &nbsp;|&nbsp;
 <a href="#roadmap"><b>🗺️ Roadmap</b></a> &nbsp;|&nbsp;
-<a href="#redes"><b>📡 Redes</b></a>
+<a href="#redes"><b>📲 Contacto</b></a>
 </p>
 
 </div>
 
-<img src="https://capsule-render.vercel.app/api?type=transparent&color=39FF14&height=2&section=header" width="100%"/>
-
 <a name="instalacion"></a>
-## 🚀 Instalación rápida
+<div align="center">
+<img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,100:39FF14&height=90&section=header&text=🚀%20INSTALACIÓN%20RÁPIDA&fontSize=28&fontColor=39FF14&fontAlignY=60&animation=fadeIn" width="100%"/>
+</div>
+
+<div align="center">
+
+[![Terminal](https://readme-typing-svg.demolab.com/?font=Fira+Code&weight=500&size=15&pause=1200&color=39FF14&background=0D1117&center=true&vCenter=true&width=620&height=50&lines=%24+git+clone+https%3A%2F%2Fgithub.com%2Fs0k1x%2Fs0k1x-toolkit.git;%24+cd+s0k1x-toolkit;%24+bash+install.sh;%24+sokix;%5B%E2%9C%94%5D+SOKIX+ready+%F0%9F%9A%80)](#)
+
+</div>
+
+<table width="100%">
+<tr>
+<td width="18%" align="center">
+
+<img src="https://img.shields.io/badge/PASO-01-0d1117?style=for-the-badge&labelColor=39FF14"/>
+
+</td>
+<td>
+
+**📥 Clona el repositorio**
+```bash
+git clone https://github.com/s0k1x/s0k1x-toolkit.git
+```
+
+</td>
+</tr>
+
+<tr>
+<td width="18%" align="center">
+
+<img src="https://img.shields.io/badge/PASO-02-0d1117?style=for-the-badge&labelColor=39FF14"/>
+
+</td>
+<td>
+
+**📂 Accede al proyecto**
+```bash
+cd s0k1x-toolkit
+```
+
+</td>
+</tr>
+
+<tr>
+<td width="18%" align="center">
+
+<img src="https://img.shields.io/badge/PASO-03-0d1117?style=for-the-badge&labelColor=39FF14"/>
+
+</td>
+<td>
+
+**⚙️ Ejecuta el instalador**
+```bash
+bash install.sh
+```
+> 💡 ¿Necesitas privilegios elevados? Usa <kbd>sudo bash install.sh</kbd>
+
+</td>
+</tr>
+
+<tr>
+<td width="18%" align="center">
+
+<img src="https://img.shields.io/badge/PASO-04-0d1117?style=for-the-badge&labelColor=39FF14"/>
+
+</td>
+<td>
+
+**⚡ Lanza SOKIX**
+```bash
+sokix
+```
+> 💡 ¿Aún no está en tu `PATH`? Ejecuta <kbd>./sokix</kbd>
+
+</td>
+</tr>
+</table>
 
 <div align="center">
 
@@ -59,11 +133,6 @@
 ┌──────────────────────────────────────────────────────────────┐
 │  ●  ●  ●                    sokix@kali: ~                    │
 ├──────────────────────────────────────────────────────────────┤
-│                                                                │
-│  $ git clone https://github.com/s0k1x/s0k1x-toolkit.git       │
-│  $ cd s0k1x-toolkit                                           │
-│  $ bash install.sh                                            │
-│  $ sokix                                                      │
 │                                                                │
 │  [✔] Dependencies resolved                                    │
 │  [✔] Environment configured                                   │
@@ -74,52 +143,10 @@
 
 </div>
 
-<table>
-<tr><td width="70" align="center"><h2>01</h2></td>
-<td>
-
-**📥 Clona el repositorio**
-```bash
-git clone https://github.com/s0k1x/s0k1x-toolkit.git
-```
-</td></tr>
-
-<tr><td align="center"><h2>02</h2></td>
-<td>
-
-**📂 Accede al proyecto**
-```bash
-cd s0k1x-toolkit
-```
-</td></tr>
-
-<tr><td align="center"><h2>03</h2></td>
-<td>
-
-**⚙️ Ejecuta el instalador**
-```bash
-bash install.sh
-```
-> 💡 ¿Necesitas privilegios elevados? Usa <kbd>sudo bash install.sh</kbd>
-
-</td></tr>
-
-<tr><td align="center"><h2>04</h2></td>
-<td>
-
-**⚡ Lanza SOKIX**
-```bash
-sokix
-```
-> 💡 ¿Aún no está en tu `PATH`? Ejecuta <kbd>./sokix</kbd>
-
-</td></tr>
-</table>
-
-<img src="https://capsule-render.vercel.app/api?type=transparent&color=39FF14&height=2&section=header" width="100%"/>
-
 <a name="caracteristicas"></a>
-## ✨ Características
+<div align="center">
+<img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,100:00d9ff&height=90&section=header&text=✨%20CARACTERÍSTICAS&fontSize=28&fontColor=00d9ff&fontAlignY=60&animation=fadeIn" width="100%"/>
+</div>
 
 <table>
 <tr>
@@ -164,10 +191,10 @@ Informes exportables, claros y listos para entregar al cliente.
 
 </div>
 
-<img src="https://capsule-render.vercel.app/api?type=transparent&color=39FF14&height=2&section=header" width="100%"/>
-
 <a name="requisitos"></a>
-## 📋 Requisitos del sistema
+<div align="center">
+<img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,100:ffb800&height=90&section=header&text=📋%20REQUISITOS%20DEL%20SISTEMA&fontSize=28&fontColor=ffb800&fontAlignY=60&animation=fadeIn" width="100%"/>
+</div>
 
 <div align="center">
 
@@ -192,10 +219,10 @@ Informes exportables, claros y listos para entregar al cliente.
 > [!NOTE]
 > El instalador descarga y configura automáticamente todas las dependencias necesarias durante la configuración inicial.
 
-<img src="https://capsule-render.vercel.app/api?type=transparent&color=39FF14&height=2&section=header" width="100%"/>
-
 <a name="faq"></a>
-## 🧩 Preguntas frecuentes
+<div align="center">
+<img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,100:b967ff&height=90&section=header&text=🧩%20PREGUNTAS%20FRECUENTES&fontSize=28&fontColor=b967ff&fontAlignY=60&animation=fadeIn" width="100%"/>
+</div>
 
 <details>
 <summary><b>❓ ¿Puedo instalarlo en otra distribución que no sea Kali?</b></summary>
@@ -231,10 +258,10 @@ bash uninstall.sh
 
 </details>
 
-<img src="https://capsule-render.vercel.app/api?type=transparent&color=39FF14&height=2&section=header" width="100%"/>
-
 <a name="roadmap"></a>
-## 🗺️ Roadmap
+<div align="center">
+<img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,100:ff5f7e&height=90&section=header&text=🗺️%20ROADMAP&fontSize=28&fontColor=ff5f7e&fontAlignY=60&animation=fadeIn" width="100%"/>
+</div>
 
 - [x] Instalador automático one-shot
 - [x] Módulos de reconocimiento y OSINT
@@ -243,19 +270,46 @@ bash uninstall.sh
 - [ ] Soporte multi-distro (experimental)
 
 <div align="center">
-<img src="https://img.shields.io/badge/PROGRESO-40%25-39FF14?style=for-the-badge&labelColor=0d1117"/>
+<img src="https://img.shields.io/badge/PROGRESO-40%25-ff5f7e?style=for-the-badge&labelColor=0d1117"/>
 </div>
-
-<img src="https://capsule-render.vercel.app/api?type=transparent&color=39FF14&height=2&section=header" width="100%"/>
 
 <a name="redes"></a>
 <div align="center">
+<img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0d1117,100:25D366&height=90&section=header&text=📲%20CONTACTO%20%26%20REDES&fontSize=28&fontColor=25D366&fontAlignY=60&animation=fadeIn" width="100%"/>
+</div>
 
-## 📡 Sígueme
+<div align="center">
+
+<table>
+<tr>
+<td align="center" width="50%">
+
+**Instagram**
 
 <a href="https://instagram.com/mariio.008__">
 <img src="https://img.shields.io/badge/-mariio.008__-E4405F?style=for-the-badge&logo=instagram&logoColor=white" width="220"/>
 </a>
+
+<br><br>
+
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&color=0d1117&bgcolor=39FF14&data=https://instagram.com/mariio.008__" width="110"/>
+
+</td>
+<td align="center" width="50%">
+
+**WhatsApp**
+
+<a href="https://wa.me/34666962150">
+<img src="https://img.shields.io/badge/%2B34%20666%2096%2021%2050-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" width="220"/>
+</a>
+
+<br><br>
+
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&color=0d1117&bgcolor=39FF14&data=https://wa.me/34666962150" width="110"/>
+
+</td>
+</tr>
+</table>
 
 </div>
 
