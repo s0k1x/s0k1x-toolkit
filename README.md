@@ -1,6 +1,6 @@
 # ⚡ Installation
 
-Get **SOKIX Toolkit** up and running in **under 60 seconds**.
+Deploy **SOKIX Toolkit** in **under 60 seconds**.
 
 ---
 
@@ -10,34 +10,24 @@ Get **SOKIX Toolkit** up and running in **under 60 seconds**.
 git clone https://github.com/s0k1x/s0k1x-toolkit.git
 ```
 
-## 2. Navigate to the Project
+## 2. Enter the Project Directory
 
 ```bash
 cd s0k1x-toolkit
 ```
 
-## 3. Install SOKIX
+## 3. Start the Installer
+
+Simply execute:
 
 ```bash
-bash install.sh
+bash sokix-toolkit
 ```
 
-If your system requires elevated privileges:
+If your system requires administrator privileges:
 
 ```bash
-sudo bash install.sh
-```
-
-## 4. Launch SOKIX
-
-```bash
-sokix
-```
-
-If the command is not yet available in your **PATH**, run it directly:
-
-```bash
-./sokix
+sudo bash sokix-toolkit
 ```
 
 ---
@@ -59,9 +49,11 @@ If the command is not yet available in your **PATH**, run it directly:
 ╚════════════════════════════════════════════════════════════╝
 ```
 
-Your installation is complete. SOKIX is now ready to use.
+## 🚀 Ready to Operate
 
-## 🚀 Features
+SOKIX is now installed and configured.
+
+### Available Modules
 
 - 🌐 Advanced Reconnaissance
 - 🔍 OSINT Intelligence Gathering
@@ -78,19 +70,19 @@ Your installation is complete. SOKIX is now ready to use.
 
 | Component | Requirement |
 |-----------|-------------|
-| Operating System | Kali Linux (Latest Release) |
-| Bash | 5.0 or newer |
-| Python | 3.11 or newer |
-| Git | Latest Stable Release |
-| Internet | Required during initial installation |
+| Operating System | Kali Linux (Latest) |
+| Bash | 5.0+ |
+| Python | 3.11+ |
+| Git | Latest Stable |
+| Internet | Required during installation |
 
 ---
 
 > [!IMPORTANT]
-> **SOKIX Toolkit** is designed **exclusively for Kali Linux** to ensure maximum compatibility, stability, and performance across all integrated offensive security tools.
+> **SOKIX Toolkit** is built exclusively for **Kali Linux**, ensuring maximum compatibility, reliability, and performance.
 
 > [!TIP]
-> After installation, restart your terminal if the `sokix` command is not immediately recognized.
+> The installer automatically downloads, installs, and configures every required dependency. No manual setup is needed.
 
 > [!NOTE]
-> The installer automatically downloads and configures all required dependencies during the initial setup.
+> Installation typically takes **less than one minute**, depending on your internet connection.
