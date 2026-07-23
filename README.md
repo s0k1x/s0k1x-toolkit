@@ -316,28 +316,11 @@ bash uninstall.sh
 
 <div align="center">
 
-<table>
-<tr>
-<td align="center" width="50%">
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=12&bgcolor=0d1117&color=3fb950&data=https://guns.lol/s0k1x" width="130"/>
 
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=12&bgcolor=0d1117&color=3fb950&data=https://instagram.com/mariio.008__" width="130"/>
+<br><br>
 
-<br>
-
-<a href="https://instagram.com/mariio.008__"><img src="https://img.shields.io/badge/Instagram-@mariio.008__-0d1117?style=for-the-badge&logo=instagram&logoColor=3fb950&color=3fb950&labelColor=0d1117"/></a>
-
-</td>
-<td align="center" width="50%">
-
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=12&bgcolor=0d1117&color=3fb950&data=https://wa.me/34666962150" width="130"/>
-
-<br>
-
-<a href="https://wa.me/34666962150"><img src="https://img.shields.io/badge/WhatsApp-%2B34%20666%2096%2021%2050-0d1117?style=for-the-badge&logo=whatsapp&logoColor=3fb950&color=3fb950&labelColor=0d1117"/></a>
-
-</td>
-</tr>
-</table>
+<a href="https://guns.lol/s0k1x"><img src="https://img.shields.io/badge/guns.lol-%2Fs0k1x-0d1117?style=for-the-badge&logo=guns&logoColor=3fb950&color=3fb950&labelColor=0d1117"/></a>
 
 </div>
 
