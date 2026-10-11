@@ -12,16 +12,16 @@ IFS=$'\n\t'
 # Advanced Global Configuration
 readonly VERSION="8.0.0"
 readonly TOOLKIT_NAME="SOKIX Professional Hacking Toolkit"
-readonly CONFIG_FILE="/etc/sokix/config.yaml"
+readonly CONFIG_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/sokix/config.yaml"
 readonly CONFIG_DIR="$(dirname "$CONFIG_FILE")"
-readonly LOG_FILE="/var/log/sokix/hacking.log"
-readonly TOOLS_DIR="/usr/share/sokix/tools"
-readonly MODULES_DIR="/usr/share/sokix/modules"
-readonly SCRIPTS_DIR="/usr/share/sokix/scripts"
-readonly CACHE_DIR="/var/cache/sokix"
-readonly TEMP_DIR="/tmp/sokix"
-readonly BACKUP_DIR="/var/backups/sokix"
-readonly REPORTS_DIR="/var/reports/sokix"
+readonly LOG_FILE="${XDG_STATE_HOME:-$HOME/.local/state}/sokix/hacking.log"
+readonly TOOLS_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sokix/tools"
+readonly MODULES_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sokix/modules"
+readonly SCRIPTS_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sokix/scripts"
+readonly CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/sokix"
+readonly TEMP_DIR="${TMPDIR:-/tmp}/sokix-${UID}"
+readonly BACKUP_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/sokix/backups"
+readonly REPORTS_DIR="${XDG_DOCUMENTS_DIR:-$HOME/Documents}/sokix-reports"
 readonly EXPLOITS_DIR="/usr/share/sokix/exploits"
 readonly PAYLOADS_DIR="/usr/share/sokix/payloads"
 readonly WORDLISTS_DIR="/usr/share/sokix/wordlists"
@@ -362,9 +362,12 @@ verify_configurations() {
 
 # Error Logging Function
 log_error() {
-    local message=$1
-    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
-    echo "[$timestamp] ERROR: $message" >> "$LOG_FILE"
+    local message=${1:-"Error desconocido"}
+    local timestamp
+    timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    printf '%b%s %s%b\n' "${COLORS[RED]}" "${UNICODE[ERROR]}" "$message" "${COLORS[NC]}" >&2
+    mkdir -p "$(dirname "$LOG_FILE")" 2>/dev/null || true
+    printf '[%s] ERROR: %s\n' "$timestamp" "$message" >> "$LOG_FILE" 2>/dev/null || true
 }
 
 # Show Error Options Function
@@ -408,7 +411,7 @@ EOF
 }
 
 # Set up error trap
-trap 'handle_error $? $LINENO' ERR
+# Se evita una recuperación ERR global que alteraba permisos recursivamente.
 
 # ConfiguraciÃ³n avanzada del entorno
 declare -a MODULES=(
@@ -1311,8 +1314,7 @@ load_module() {
     local config_file="${MODULE_CONFIGS[$module]}"
     
     if [ -f "$CONFIG_DIR/$config_file" ]; then
-        source "$CONFIG_DIR/$config_file"
-        log_success "MÃ³dulo $module cargado"
+        log_info "Configuración disponible para el módulo $module: $CONFIG_DIR/$config_file"
     else
         log_warning "ConfiguraciÃ³n no encontrada para $module"
     fi
@@ -1320,21 +1322,17 @@ load_module() {
 
 # FunciÃ³n para instalar dependencias
 install_dependency() {
-    local dep=$1
-    log_info "Instalando $dep..."
-    
-    if command -v apt-get >/dev/null 2>&1; then
-        run_or_fail "Error al instalar $dep con apt-get" bash -c "sudo apt-get update && sudo apt-get install -y '$dep'" || return 1
-    elif command -v yum >/dev/null 2>&1; then
-        run_or_fail "Error al instalar $dep con yum" sudo yum install -y "$dep" || return 1
-    elif command -v pacman >/dev/null 2>&1; then
-        run_or_fail "Error al instalar $dep con pacman" sudo pacman -S --noconfirm "$dep" || return 1
-    else
-        log_error "No se pudo determinar el gestor de paquetes"
-        return 1
+    local dep=${1:-}
+    if [[ -z "$dep" ]]; then
+        log_error "No se especificó una dependencia"
+        return 2
     fi
-    
-    return 0
+    if command -v "$dep" >/dev/null 2>&1; then
+        log_success "$dep ya está instalado"
+        return 0
+    fi
+    log_warning "Falta '$dep'. Instálalo con el gestor de paquetes de tu sistema y vuelve a intentarlo."
+    return 1
 }
 
 # FunciÃ³n para configurar el entorno
@@ -1351,8 +1349,7 @@ setup_environment() {
     mkdir -p "$TOOLS_DIR/java"
     
     # Configurar permisos
-    chmod -R 755 "$TOOLS_DIR"
-    chown -R "$(whoami)" "$TOOLS_DIR"
+    chmod 755 "$TOOLS_DIR" "$TOOLS_DIR/bin" "$TOOLS_DIR/python" "$TOOLS_DIR/ruby" "$TOOLS_DIR/perl" "$TOOLS_DIR/java" 2>/dev/null || true
 }
 
 # FunciÃ³n para inicializar herramientas
@@ -1497,7 +1494,7 @@ is_tool_installed() {
     if [ -d "$tool_dir" ]; then
         # Verificar si hay un archivo ejecutable principal
         local main_file=$(find_main_file "$tool_dir")
-        if [ -n "$main_file" ] && [ -x "$main_file" ]; then
+        if [ -n "$main_file" ] && [ -f "$main_file" ]; then
             return 0
         fi
     fi
@@ -1552,14 +1549,123 @@ install_tool() {
     return 0
 }
 
+# Manejo del menú principal: no descarga ni ejecuta herramientas sin confirmación.
+handle_tool_selection() {
+    local choice=${1:-} tool_name="" action=""
+    case "$choice" in
+        1) tool_name="AllHackingTools" ;;
+        2) tool_name="NetSoc_OSINT" ;;
+        3) tool_name="OSINT-Framework" ;;
+        4) tool_name="ReconDog" ;;
+        5) tool_name="OSINT-Tool" ;;
+        6) tool_name="OSINT-Toolkit" ;;
+        7) tool_name="XSS-Tools" ;;
+        8) tool_name="D-TECT" ;;
+        9) tool_name="XSStrike" ;;
+        10) tool_name="SQLMap" ;;
+        11) tool_name="WPScan" ;;
+        12) tool_name="Burp-Suite" ;;
+        13) tool_name="OWASP-ZAP" ;;
+        14) tool_name="BeEF" ;;
+        15) tool_name="Metasploit-Framework" ;;
+        16) tool_name="Empire" ;;
+        17) tool_name="Cobalt-Strike" ;;
+        18) tool_name="Mimikatz" ;;
+        19) tool_name="CrackMapExec" ;;
+        20) tool_name="Impacket" ;;
+        21) tool_name="Nmap" ;;
+        22) tool_name="Wireshark" ;;
+        23) tool_name="Bettercap" ;;
+        24) tool_name="Nessus" ;;
+        25) tool_name="Burp-Suite" ;;
+        26) tool_name="OWASP-ZAP" ;;
+        27) tool_name="SQLMap" ;;
+        28) tool_name="XSStrike" ;;
+        29) tool_name="Vega" ;;
+        30) tool_name="Nikto" ;;
+        31) tool_name="Skipfish" ;;
+        32) tool_name="Wfuzz" ;;
+        33) tool_name="Maltego" ;;
+        34) tool_name="Recon-ng" ;;
+        35) tool_name="SpiderFoot" ;;
+        36) tool_name="Amass" ;;
+        37) tool_name="Sublist3r" ;;
+        38) tool_name="Fierce" ;;
+        39) tool_name="Subfinder" ;;
+        40) tool_name="Dirsearch" ;;
+        41) tool_name="Nuclei" ;;
+        42) tool_name="Gobuster" ;;
+        43) tool_name="Social-Engineering-Toolkit" ;;
+        44) tool_name="GoPhish" ;;
+        45) tool_name="Zphisher" ;;
+        46) tool_name="Aircrack-ng" ;;
+        47) tool_name="Hashcat" ;;
+        48) tool_name="John-the-Ripper" ;;
+        49) tool_name="Hydra" ;;
+        50) tool_name="Cewl" ;;
+        51) tool_name="ProxyChains" ;;
+        52) tool_name="GoReverseShell" ;;
+        53) tool_name="T50" ;;
+        54) tool_name="Nginx-Helper" ;;
+        55) tool_name="Crackstation" ;;
+        59) tool_name="Game-Hacking" ;;
+        60) tool_name="Cheat-Engine" ;;
+        61) tool_name="Squalr" ;;
+        62) tool_name="MungPlex" ;;
+        63) tool_name="GTA-SA-Cheats" ;;
+        64) tool_name="Payback2-CHEATus" ;;
+        65) tool_name="SimCity-Cheat" ;;
+        66) tool_name="Warzone2100" ;;
+        67) tool_name="StellarRealms" ;;
+        68) tool_name="Hacking-Online-Games" ;;
+        69) tool_name="Reloaded-Memory-SigScan" ;;
+        70) tool_name="GH-D3D11-Hook" ;;
+        71) tool_name="WhatsAppHacking" ;;
+        72) tool_name="Android-Studio" ;;
+        73) tool_name="APKTool" ;;
+        74) tool_name="Dex2Jar" ;;
+        56)
+            mkdir -p "$CONFIG_DIR"
+            [[ -f "$CONFIG_FILE" ]] || create_default_config
+            printf 'Archivo de configuración: %s\
+' "$CONFIG_FILE"
+            read -r -p "Pulsa Intro para continuar..." _
+            return 0 ;;
+        57)
+            log_warning "Actualizaciones automáticas desactivadas; actualiza cada repositorio manualmente."
+            read -r -p "Pulsa Intro para continuar..." _
+            return 0 ;;
+        58|q|Q|salir|exit) echo "Saliendo de SOKIX."; exit 0 ;;
+        *) log_warning "Opción no válida: $choice"; read -r -p "Pulsa Intro para continuar..." _; return 0 ;;
+    esac
+    printf '\
+Herramienta seleccionada: %s\
+1) Instalar/descargar\
+2) Ejecutar si está instalada\
+3) Volver\
+' "$tool_name"
+    read -r -p "Elige una acción: " action
+    case "$action" in
+        1) install_tool "$tool_name" || log_warning "No se pudo instalar $tool_name." ;;
+        2) if is_tool_installed "$tool_name"; then run_tool "$tool_name" || log_warning "La ejecución terminó con errores."; else log_warning "$tool_name no está instalada."; fi ;;
+        3) return 0 ;;
+        *) log_warning "Acción no válida." ;;
+    esac
+    read -r -p "Pulsa Intro para volver al menú..." _
+}
+
 # FunciÃ³n principal
 main() {
-    show_banner
-    show_loading_screen
-    
+    local choice
+    mkdir -p "$CONFIG_DIR" "$TOOLS_DIR" "$MODULES_DIR" "$SCRIPTS_DIR" "$CACHE_DIR" "$TEMP_DIR" "$BACKUP_DIR" "$REPORTS_DIR" "$(dirname "$LOG_FILE")"
+    [[ -f "$CONFIG_FILE" ]] || create_default_config
     while true; do
+        show_banner
         show_main_menu
-        read -r choice
+        if ! read -r -p "Selecciona una opción (1-74, 58 para salir): " choice; then
+            printf '\\nSaliendo de SOKIX.\\n'
+            break
+        fi
         handle_tool_selection "$choice"
     done
 }
