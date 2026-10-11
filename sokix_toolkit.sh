@@ -1,5 +1,20 @@
 #!/bin/bash
 
+# SOKIX requiere privilegios de administrador. Si no es root, solicita elevación.
+if [[ ${EUID:-$(id -u)} -ne 0 ]]; then
+    printf '\033[1;33m[!] SOKIX necesita permisos de administrador.\033[0m\n'
+    script_path=$(readlink -f -- "$0") || exit 1
+    if command -v sudo >/dev/null 2>&1; then
+        exec sudo -- bash "$script_path" "$@"
+    elif command -v pkexec >/dev/null 2>&1; then
+        printf 'pkexec disponible, pero para conservar los argumentos con seguridad ejecuta: sudo bash %q\n' "$script_path" >&2
+        exit 1
+    else
+        printf 'No encuentro sudo. En Kali, abre una terminal root y ejecuta: bash %q\n' "$script_path" >&2
+        exit 1
+    fi
+fi
+
 # SOKIX Toolkit - Professional Ethical Hacking Environment
 # Version: 8.0.0
 # License: MIT
@@ -12,16 +27,16 @@ IFS=$'\n\t'
 # Advanced Global Configuration
 readonly VERSION="8.0.0"
 readonly TOOLKIT_NAME="SOKIX Professional Hacking Toolkit"
-readonly CONFIG_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/sokix/config.yaml"
+readonly CONFIG_FILE="${SOKIX_HOME:-/opt/sokix}/config/config.yaml"
 readonly CONFIG_DIR="$(dirname "$CONFIG_FILE")"
-readonly LOG_FILE="${XDG_STATE_HOME:-$HOME/.local/state}/sokix/hacking.log"
-readonly TOOLS_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sokix/tools"
-readonly MODULES_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sokix/modules"
-readonly SCRIPTS_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sokix/scripts"
-readonly CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/sokix"
+readonly LOG_FILE="${SOKIX_HOME:-/opt/sokix}/logs/sokix.log"
+readonly TOOLS_DIR="${SOKIX_HOME:-/opt/sokix}/tools"
+readonly MODULES_DIR="${SOKIX_HOME:-/opt/sokix}/modules"
+readonly SCRIPTS_DIR="${SOKIX_HOME:-/opt/sokix}/scripts"
+readonly CACHE_DIR="${SOKIX_HOME:-/opt/sokix}/cache"
 readonly TEMP_DIR="${TMPDIR:-/tmp}/sokix-${UID}"
-readonly BACKUP_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/sokix/backups"
-readonly REPORTS_DIR="${XDG_DOCUMENTS_DIR:-$HOME/Documents}/sokix-reports"
+readonly BACKUP_DIR="${SOKIX_HOME:-/opt/sokix}/backups"
+readonly REPORTS_DIR="${SOKIX_HOME:-/opt/sokix}/reports"
 readonly EXPLOITS_DIR="/usr/share/sokix/exploits"
 readonly PAYLOADS_DIR="/usr/share/sokix/payloads"
 readonly WORDLISTS_DIR="/usr/share/sokix/wordlists"
@@ -168,25 +183,47 @@ declare -A DIAGNOSTIC_CHECKS=(
     [cpu]="Comprobando carga del procesador"
 )
 
+# Animación breve de inicio (sin dependencias externas; respeta terminales no interactivos).
+startup_animation() {
+    [[ -t 1 ]] || return 0
+    local frames=("INICIALIZANDO CONSOLA" "COMPROBANDO ENTORNO" "CARGANDO MODULOS" "SISTEMA LISTO") frame i
+    command -v clear >/dev/null 2>&1 && clear || printf '\033[2J\033[H'
+    printf '\033[1;36m'
+    cat <<'BANNER'
+   _____  ____  _  __ _____  __
+  / ___/ / __ \/ |/ //  _/ |/ /
+  \__ \ / /_/ /    /_/ //    /
+ ___/ // ____/ /|  / // / /|  /
+/____//_/    /_/ |_/___/_/ |_/
+BANNER
+    printf '\033[0m\n'
+    for frame in "${frames[@]}"; do
+        printf '\033[1;32m[ SOKIX ]\033[0m %-28s' "$frame"
+        for ((i=0; i<3; i++)); do printf '.'; sleep 0.08; done
+        printf '\n'
+    done
+    sleep 0.1
+}
+
 # Advanced ASCII Art Banner
 show_banner() {
-    clear
-    echo -e "${COLORS['PURPLE']}"
-    echo "  ââââââââ âââââââ âââ  âââââââââ  âââ"
-    echo "  ââââââââââââââââââââ âââââââââââââââ"
-    echo "  âââââââââââ   ââââââââââ âââ ââââââ "
-    echo "  âââââââââââ   ââââââââââ âââ ââââââ "
-    echo "  ââââââââââââââââââââ  ââââââââââ âââ"
-    echo "  ââââââââ âââââââ âââ  âââââââââ  âââ"
-    echo -e "${COLORS['NC']}"
-    echo -e "${COLORS['CYAN']}Professional Ethical Hacking Environment v$VERSION${COLORS['NC']}"
-    echo -e "${COLORS['YELLOW']}Copyright (c) 2024 SOKIX Security Team${COLORS['NC']}"
-    echo
+    command -v clear >/dev/null 2>&1 && clear || true
+    printf '\033[1;35m'
+    cat <<'BANNER'
+  ███████╗ ██████╗ ██╗  ██╗██╗██╗  ██╗
+  ██╔════╝██╔═══██╗██║ ██╔╝██║╚██╗██╔╝
+  ███████╗██║   ██║█████╔╝ ██║ ╚███╔╝
+  ╚════██║██║   ██║██╔═██╗ ██║ ██╔██╗
+  ███████║╚██████╔╝██║  ██╗██║██╔╝ ██╗
+  ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝
+BANNER
+    printf '\033[0m'
+    printf '\033[1;36m  SOKIX Toolkit v%s | Consola de auditoría autorizada\033[0m\n' "$VERSION"
+    printf '\033[0;90m  Instalación controlada · registros · comprobaciones\033[0m\n\n'
 }
 
 # Enhanced Main Menu with Categories
 show_main_menu() {
-    clear
     echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_TOP']}${COLORS['NC']}"
     echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['CYAN']}${UNICODE['TERMINAL']} SOKIX Toolkit v$VERSION ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
     echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
@@ -1392,160 +1429,117 @@ initialize_tools() {
 
 # FunciÃ³n para encontrar el archivo principal de una herramienta
 find_main_file() {
-    local tool_dir=$1
-    local patterns=(
-        "*.sh"
-        "*.py"
-        "*.rb"
-        "*.jar"
-        "*.exe"
-        "main.*"
-        "run.*"
-        "start.*"
-        "init.*"
-        "setup.*"
-    )
-    
-    for pattern in "${patterns[@]}"; do
-        local file=$(find "$tool_dir" -type f -name "$pattern" | head -n 1)
-        if [ -n "$file" ]; then
-            echo "$file"
-            return 0
-        fi
+    local tool_dir=${1:-} candidate
+    [[ -d "$tool_dir" ]] || return 1
+    # Prefer documented entry points; avoid accidentally running a random script.
+    for candidate in main.py app.py run.py cli.py __main__.py main.sh run.sh start.sh; do
+        if [[ -f "$tool_dir/$candidate" ]]; then printf '%s\n' "$tool_dir/$candidate"; return 0; fi
     done
-    
+    for candidate in "$tool_dir"/*.sh "$tool_dir"/*.py "$tool_dir"/*.rb "$tool_dir"/*.jar; do
+        [[ -f "$candidate" ]] || continue
+        printf '%s\n' "$candidate"; return 0
+    done
     return 1
 }
 
 # FunciÃ³n para ejecutar herramientas
 run_tool() {
-    local tool_name=$1
-    local tool_dir="$TOOLS_DIR/$tool_name"
-    shift  # Eliminar el primer argumento (nombre de la herramienta)
-    local args=("$@")  # Resto de argumentos
-    
-    if [ ! -d "$tool_dir" ]; then
-        log_error "La herramienta $tool_name no estÃ¡ instalada"
-        return 1
-    fi
-    
-    # Verificar si la herramienta ya estÃ¡ en ejecuciÃ³n
-    if pgrep -f "$tool_name" > /dev/null; then
-        log_warning "$tool_name ya estÃ¡ en ejecuciÃ³n"
-        return 1
-    fi
-    
-    log_info "${UNICODE['TERMINAL']} Ejecutando $tool_name..."
-    
-    # Buscar el archivo principal
-    local main_file
-    main_file=$(find_main_file "$tool_dir")
-    
-    if [ -z "$main_file" ]; then
-        log_error "No se encontrÃ³ el archivo principal de $tool_name"
-        return 1
-    fi
-    
-    # Obtener la extensiÃ³n del archivo
-    local extension="${main_file##*.}"
-    
-    # Hacer el archivo ejecutable si es necesario
-    if [[ "$extension" == "sh" || "$extension" == "py" || "$extension" == "rb" ]]; then
-        run_or_fail "No se pudo hacer ejecutable el archivo principal" chmod +x "$main_file" || return 1
-    fi
-    
-    # Ejecutar el archivo segÃºn su extensiÃ³n
-    local tool_status=0
+    local tool_name=${1:-} tool_dir main_file extension python_bin
+    [[ -n "$tool_name" ]] || { log_error "No se indicó herramienta"; return 2; }
+    shift
+    tool_dir="$TOOLS_DIR/$tool_name"
+    [[ -d "$tool_dir" ]] || { log_error "$tool_name no está instalada en $tool_dir"; return 1; }
+    main_file=$(find_main_file "$tool_dir") || { log_error "No encuentro un punto de entrada claro para $tool_name. Consulta su README."; return 1; }
+    extension=${main_file##*.}
+    log_warning "Vas a ejecutar código de terceros: $main_file"
+    read -r -p "Confirma que tienes autorización y revisaste el código (escribe SI): " confirm
+    [[ "$confirm" == "SI" ]] || { log_info "Ejecución cancelada."; return 0; }
     case "$extension" in
-        "sh")
-            (cd "$(dirname "$main_file")" && ./"$(basename "$main_file")" "${args[@]}") || tool_status=$?
-            ;;
-        "py")
-            (cd "$(dirname "$main_file")" && python3 "$(basename "$main_file")" "${args[@]}") || tool_status=$?
-            ;;
-        "rb")
-            (cd "$(dirname "$main_file")" && ruby "$(basename "$main_file")" "${args[@]}") || tool_status=$?
-            ;;
-        "jar")
-            (cd "$(dirname "$main_file")" && java -jar "$(basename "$main_file")" "${args[@]}") || tool_status=$?
-            ;;
-        "exe")
-            (cd "$(dirname "$main_file")" && wine "$(basename "$main_file")" "${args[@]}") || tool_status=$?
-            ;;
-        *)
-            (cd "$(dirname "$main_file")" && ./"$(basename "$main_file")" "${args[@]}") || tool_status=$?
-            ;;
+        sh) bash "$main_file" "$@" ;;
+        py)
+            python_bin="$tool_dir/.venv/bin/python"
+            [[ -x "$python_bin" ]] || python_bin=$(command -v python3 || true)
+            [[ -n "$python_bin" ]] || { log_error "Falta python3"; return 1; }
+            "$python_bin" "$main_file" "$@" ;;
+        rb) command -v ruby >/dev/null 2>&1 || { log_error "Falta ruby"; return 1; }; ruby "$main_file" "$@" ;;
+        jar) command -v java >/dev/null 2>&1 || { log_error "Falta Java"; return 1; }; java -jar "$main_file" "$@" ;;
+        *) log_error "Tipo de entrada no compatible automáticamente: .$extension. Consulta el README."; return 1 ;;
     esac
-    
-    # Verificar si la ejecuciÃ³n fue exitosa
-    if [ "$tool_status" -ne 0 ]; then
-        log_error "Error al ejecutar $tool_name"
-        return 1
-    fi
-    
-    return 0
 }
 
 # FunciÃ³n para verificar si una herramienta estÃ¡ instalada
 is_tool_installed() {
-    local tool_name=$1
-    local tool_dir="$TOOLS_DIR/$tool_name"
-    
-    if [ -d "$tool_dir" ]; then
-        # Verificar si hay un archivo ejecutable principal
-        local main_file=$(find_main_file "$tool_dir")
-        if [ -n "$main_file" ] && [ -f "$main_file" ]; then
-            return 0
-        fi
-    fi
-    return 1
+    local tool_name=${1:-} tool_dir="${TOOLS_DIR}/${1:-}" command_name=""
+    case "$tool_name" in
+        Nmap) command_name=nmap ;; Wireshark) command_name=wireshark ;; SQLMap) command_name=sqlmap ;;
+        Aircrack-ng) command_name=aircrack-ng ;; Hydra) command_name=hydra ;; Nikto) command_name=nikto ;;
+        Gobuster) command_name=gobuster ;; John-the-Ripper) command_name=john ;; Hashcat) command_name=hashcat ;;
+        Impacket) command_name=impacket-scripts ;; Metasploit-Framework) command_name=msfconsole ;;
+    esac
+    if [[ -n "$command_name" ]] && command -v "$command_name" >/dev/null 2>&1; then return 0; fi
+    [[ -n "$tool_name" && -d "$tool_dir" ]] || return 1
+    [[ -f "$tool_dir/.sokix-installed" ]] && return 0
+    find_main_file "$tool_dir" >/dev/null 2>&1
 }
 
 # FunciÃ³n para instalar herramientas
 install_tool() {
-    local tool_name=$1
-    local tool_dir="$TOOLS_DIR/$tool_name"
-    
-    # Verificar si ya estÃ¡ instalada
-    if is_tool_installed "$tool_name"; then
-        log_success "$tool_name ya estÃ¡ instalada"
+    local tool_name=${1:-} repo_url tool_dir stage venv_dir
+    [[ -n "$tool_name" ]] || { log_error "No se indicó herramienta"; return 2; }
+    repo_url=${GITHUB_REPOS[$tool_name]:-}
+    [[ -n "$repo_url" ]] || { log_error "No hay repositorio configurado para $tool_name"; return 1; }
+    # Prefer Kali/Debian packages for these tools: dependencies and updates are handled by APT.
+    local apt_package=""
+    case "$tool_name" in
+        Nmap) apt_package=nmap ;; Wireshark) apt_package=wireshark ;; SQLMap) apt_package=sqlmap ;;
+        Aircrack-ng) apt_package=aircrack-ng ;; Hydra) apt_package=hydra ;; Nikto) apt_package=nikto ;;
+        Gobuster) apt_package=gobuster ;; John-the-Ripper) apt_package=john ;; Hashcat) apt_package=hashcat ;;
+        Impacket) apt_package=python3-impacket ;; Metasploit-Framework) apt_package=metasploit-framework ;;
+        *) apt_package="" ;;
+    esac
+    if [[ -n "$apt_package" ]] && command -v apt-get >/dev/null 2>&1; then
+        if dpkg-query -W -f='${Status}' "$apt_package" 2>/dev/null | grep -q 'install ok installed'; then
+            log_success "$apt_package ya está instalado por APT"; return 0
+        fi
+        log_warning "Instalando paquete de distribución: $apt_package"
+        if DEBIAN_FRONTEND=noninteractive apt-get install -y -- "$apt_package"; then
+            log_success "$tool_name instalado mediante APT"; return 0
+        fi
+        log_error "APT no pudo instalar $apt_package; no continuaré con un clon alternativo automático."
+        return 1
+    fi
+    command -v git >/dev/null 2>&1 || { log_error "Falta git. Instálalo con: apt install git"; return 1; }
+    mkdir -p "$TOOLS_DIR" "$CACHE_DIR" || { log_error "No puedo crear directorios de SOKIX"; return 1; }
+    tool_dir="$TOOLS_DIR/$tool_name"
+    if [[ -d "$tool_dir/.git" || -f "$tool_dir/.sokix-installed" ]]; then
+        log_warning "$tool_name ya tiene una instalación; no la sobrescribo."
         return 0
     fi
-    
-    log_info "Instalando $tool_name..."
-    
-    # Obtener el repositorio de GitHub
-    local repo_url="${GITHUB_REPOS[$tool_name]:-}"
-    if [ -z "$repo_url" ]; then
-        log_error "No se encontrÃ³ el repositorio de GitHub para $tool_name"
+    if [[ -e "$tool_dir" ]]; then
+        log_error "Existe $tool_dir pero no parece una instalación gestionada por SOKIX. Renómbrala o revísala antes de continuar."
         return 1
     fi
-    
-    # Crear directorio para la herramienta
-    run_or_fail "No se pudo crear el directorio para $tool_name" mkdir -p "$tool_dir" || return 1
-    
-    # Clonar repositorio
-    log_warning "Clonando repositorio: $repo_url"
-    run_or_fail "Error al clonar el repositorio de $tool_name" git clone "$repo_url" "$tool_dir" || return 1
-    
-    # Instalar dependencias especÃ­ficas de la herramienta
-    if [ -f "$tool_dir/requirements.txt" ]; then
-        log_warning "Instalando dependencias de Python..."
-        run_or_fail "Error al instalar dependencias de Python para $tool_name" pip install -r "$tool_dir/requirements.txt" || return 1
+    stage=$(mktemp -d "$TOOLS_DIR/.${tool_name}.XXXXXX") || return 1
+    log_info "Clonando repositorio oficial configurado para $tool_name..."
+    if ! git clone --depth 1 -- "$repo_url" "$stage/repo"; then
+        rm -rf -- "$stage"; log_error "Falló git clone: $repo_url"; return 1
     fi
-    
-    if [ -f "$tool_dir/setup.py" ]; then
-        log_warning "Instalando con setup.py..."
-        run_or_fail "Error al instalar con setup.py para $tool_name" bash -c "cd '$tool_dir' && python setup.py install" || return 1
+    if [[ ! -d "$stage/repo/.git" ]]; then rm -rf -- "$stage"; log_error "El repositorio clonado no es válido"; return 1; fi
+    # Nunca ejecutar setup.py ni instalar dependencias globales como root.
+    if [[ -f "$stage/repo/requirements.txt" ]]; then
+        if ! command -v python3 >/dev/null 2>&1; then rm -rf -- "$stage"; log_error "Falta python3"; return 1; fi
+        if ! python3 -m venv "$stage/repo/.venv"; then
+            rm -rf -- "$stage"; log_error "No se pudo crear el entorno virtual. En Kali instala python3-venv."; return 1
+        fi
+        if ! "$stage/repo/.venv/bin/python" -m pip install --disable-pip-version-check -r "$stage/repo/requirements.txt"; then
+            rm -rf -- "$stage"; log_error "Falló la instalación de dependencias de $tool_name"; return 1
+        fi
     fi
-    
-    # Verificar la instalaciÃ³n
-    if ! is_tool_installed "$tool_name"; then
-        log_error "La instalaciÃ³n de $tool_name no fue exitosa"
-        return 1
-    fi
-    
-    log_success "$tool_name instalada correctamente"
+    printf '%s\n' "$repo_url" > "$stage/repo/.sokix-source"
+    : > "$stage/repo/.sokix-installed"
+    if ! mv -- "$stage/repo" "$tool_dir"; then rm -rf -- "$stage"; log_error "No se pudo guardar la instalación"; return 1; fi
+    rm -rf -- "$stage"
+    log_success "$tool_name descargada y preparada. Revisa el README antes de ejecutarla."
     return 0
 }
 
@@ -1657,7 +1651,8 @@ Herramienta seleccionada: %s\
 # FunciÃ³n principal
 main() {
     local choice
-    mkdir -p "$CONFIG_DIR" "$TOOLS_DIR" "$MODULES_DIR" "$SCRIPTS_DIR" "$CACHE_DIR" "$TEMP_DIR" "$BACKUP_DIR" "$REPORTS_DIR" "$(dirname "$LOG_FILE")"
+    startup_animation
+    mkdir -p "$CONFIG_DIR" "$TOOLS_DIR" "$MODULES_DIR" "$SCRIPTS_DIR" "$CACHE_DIR" "$TEMP_DIR" "$BACKUP_DIR" "$REPORTS_DIR" "$(dirname "$LOG_FILE")" || { log_error "No se pudieron crear los directorios de SOKIX"; exit 1; }
     [[ -f "$CONFIG_FILE" ]] || create_default_config
     while true; do
         show_banner
