@@ -1,22 +1,7 @@
-#!/bin/bash
-
-# SOKIX requiere privilegios de administrador. Si no es root, solicita elevación.
-if [[ ${EUID:-$(id -u)} -ne 0 ]]; then
-    printf '\033[1;33m[!] SOKIX necesita permisos de administrador.\033[0m\n'
-    script_path=$(readlink -f -- "$0") || exit 1
-    if command -v sudo >/dev/null 2>&1; then
-        exec sudo -- bash "$script_path" "$@"
-    elif command -v pkexec >/dev/null 2>&1; then
-        printf 'pkexec disponible, pero para conservar los argumentos con seguridad ejecuta: sudo bash %q\n' "$script_path" >&2
-        exit 1
-    else
-        printf 'No encuentro sudo. En Kali, abre una terminal root y ejecuta: bash %q\n' "$script_path" >&2
-        exit 1
-    fi
-fi
+#!/usr/bin/env bash
 
 # SOKIX Toolkit - Professional Ethical Hacking Environment
-# Version: 8.0.0
+# Version: 9.1.0
 # License: MIT
 # Author: SOKIX Security Team
 
@@ -25,18 +10,18 @@ set -euo pipefail
 IFS=$'\n\t'
 
 # Advanced Global Configuration
-readonly VERSION="8.0.0"
+readonly VERSION="9.1.0"
 readonly TOOLKIT_NAME="SOKIX Professional Hacking Toolkit"
-readonly CONFIG_FILE="${SOKIX_HOME:-/opt/sokix}/config/config.yaml"
+readonly CONFIG_FILE="${SOKIX_HOME:-${HOME:-/tmp}/.local/share/sokix}/config/config.yaml"
 readonly CONFIG_DIR="$(dirname "$CONFIG_FILE")"
-readonly LOG_FILE="${SOKIX_HOME:-/opt/sokix}/logs/sokix.log"
-readonly TOOLS_DIR="${SOKIX_HOME:-/opt/sokix}/tools"
-readonly MODULES_DIR="${SOKIX_HOME:-/opt/sokix}/modules"
-readonly SCRIPTS_DIR="${SOKIX_HOME:-/opt/sokix}/scripts"
-readonly CACHE_DIR="${SOKIX_HOME:-/opt/sokix}/cache"
+readonly LOG_FILE="${SOKIX_HOME:-${HOME:-/tmp}/.local/share/sokix}/logs/sokix.log"
+readonly TOOLS_DIR="${SOKIX_HOME:-${HOME:-/tmp}/.local/share/sokix}/tools"
+readonly MODULES_DIR="${SOKIX_HOME:-${HOME:-/tmp}/.local/share/sokix}/modules"
+readonly SCRIPTS_DIR="${SOKIX_HOME:-${HOME:-/tmp}/.local/share/sokix}/scripts"
+readonly CACHE_DIR="${SOKIX_HOME:-${HOME:-/tmp}/.local/share/sokix}/cache"
 readonly TEMP_DIR="${TMPDIR:-/tmp}/sokix-${UID}"
-readonly BACKUP_DIR="${SOKIX_HOME:-/opt/sokix}/backups"
-readonly REPORTS_DIR="${SOKIX_HOME:-/opt/sokix}/reports"
+readonly BACKUP_DIR="${SOKIX_HOME:-${HOME:-/tmp}/.local/share/sokix}/backups"
+readonly REPORTS_DIR="${SOKIX_HOME:-${HOME:-/tmp}/.local/share/sokix}/reports"
 readonly EXPLOITS_DIR="/usr/share/sokix/exploits"
 readonly PAYLOADS_DIR="/usr/share/sokix/payloads"
 readonly WORDLISTS_DIR="/usr/share/sokix/wordlists"
@@ -87,7 +72,7 @@ UNICODE=(
     ["BORDER_SIDE"]="|"
     ["BORDER_MIDDLE"]="|------------------------------------------|"
     ["SPARKLE"]="*"
-    ["CHECK"]="â"
+    ["CHECK"]="✓"
     ["WARNING"]="!"
     ["ERROR"]="x"
     ["INFO"]="i"
@@ -169,7 +154,7 @@ run_or_fail() {
     return 0
 }
 
-# Sistema de diagnÃ³stico mejorado
+# Sistema de diagnóstico mejorado
 declare -A DIAGNOSTIC_CHECKS=(
     [system]="Verificando sistema operativo y recursos"
     [network]="Comprobando conectividad y servicios de red"
@@ -186,176 +171,73 @@ declare -A DIAGNOSTIC_CHECKS=(
 # Animación breve de inicio (sin dependencias externas; respeta terminales no interactivos).
 startup_animation() {
     [[ -t 1 ]] || return 0
-    local frames=("INICIALIZANDO CONSOLA" "COMPROBANDO ENTORNO" "CARGANDO MODULOS" "SISTEMA LISTO") frame i
-    command -v clear >/dev/null 2>&1 && clear || printf '\033[2J\033[H'
-    printf '\033[1;36m'
+    local frames=("INICIALIZANDO NÚCLEO" "VERIFICANDO ENTORNO" "PREPARANDO MÓDULOS" "CONSOLA LISTA") frame i
+    printf '\033[2J\033[H'
+    printf '\033[38;5;51m'
     cat <<'BANNER'
-   _____  ____  _  __ _____  __
-  / ___/ / __ \/ |/ //  _/ |/ /
-  \__ \ / /_/ /    /_/ //    /
- ___/ // ____/ /|  / // / /|  /
-/____//_/    /_/ |_/___/_/ |_/
+╔══════════════════════════════════════════════════════════════════════╗
+║  ███████╗ ██████╗ ██╗  ██╗██╗██╗  ██╗                              ║
+║  ██╔════╝██╔═══██╗██║ ██╔╝██║╚██╗██╔╝                              ║
+║  ███████╗██║   ██║█████╔╝ ██║ ╚███╔╝                               ║
+║  ╚════██║██║   ██║██╔═██╗ ██║ ██╔██╗                               ║
+║  ███████║╚██████╔╝██║  ██╗██║██╔╝ ██╗                              ║
+║  ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝                              ║
+╚══════════════════════════════════════════════════════════════════════╝
 BANNER
     printf '\033[0m\n'
     for frame in "${frames[@]}"; do
-        printf '\033[1;32m[ SOKIX ]\033[0m %-28s' "$frame"
-        for ((i=0; i<3; i++)); do printf '.'; sleep 0.08; done
+        printf '\033[38;5;45m  ◈ SOKIX \033[38;5;250m%-27s \033[0m' "$frame"
+        for ((i=0; i<18; i++)); do printf '\033[38;5;51m▰\033[0m'; sleep 0.018; done
         printf '\n'
     done
-    sleep 0.1
+    sleep 0.12
 }
 
 # Advanced ASCII Art Banner
 show_banner() {
-    command -v clear >/dev/null 2>&1 && clear || true
-    printf '\033[1;35m'
+    [[ -t 1 ]] && printf '\033[2J\033[H'
+    local host os kernel now
+    host=$(hostname 2>/dev/null || printf 'host-local')
+    os=$(sed -n 's/^PRETTY_NAME="?\(.*\)"?$/\1/p' /etc/os-release 2>/dev/null | head -n 1)
+    os=${os:-Linux}
+    kernel=$(uname -r 2>/dev/null || printf 'desconocido')
+    now=$(date '+%d/%m/%Y  %H:%M:%S')
+    printf '\033[38;5;51m'
     cat <<'BANNER'
-  ███████╗ ██████╗ ██╗  ██╗██╗██╗  ██╗
-  ██╔════╝██╔═══██╗██║ ██╔╝██║╚██╗██╔╝
-  ███████╗██║   ██║█████╔╝ ██║ ╚███╔╝
-  ╚════██║██║   ██║██╔═██╗ ██║ ██╔██╗
-  ███████║╚██████╔╝██║  ██╗██║██╔╝ ██╗
-  ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝
+   ███████╗ ██████╗ ██╗  ██╗██╗██╗  ██╗
+   ██╔════╝██╔═══██╗██║ ██╔╝██║╚██╗██╔╝
+   ███████╗██║   ██║█████╔╝ ██║ ╚███╔╝
+   ╚════██║██║   ██║██╔═██╗ ██║ ██╔██╗
+   ███████║╚██████╔╝██║  ██╗██║██╔╝ ██╗
+   ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝
 BANNER
     printf '\033[0m'
-    printf '\033[1;36m  SOKIX Toolkit v%s | Consola de auditoría autorizada\033[0m\n' "$VERSION"
-    printf '\033[0;90m  Instalación controlada · registros · comprobaciones\033[0m\n\n'
+    printf '  \033[1;97mS E C U R I T Y   O P S\033[0m  \033[38;5;51m/\033[0m  \033[38;5;213mTOOLKIT v%s\033[0m\n' "$VERSION"
+    printf '  \033[38;5;240m%s\033[0m\n' '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    printf '  \033[38;5;45m●\033[0m %-22s  \033[38;5;45m●\033[0m %-22s  \033[38;5;45m●\033[0m %s\n' "HOST  $host" "OS  $os" "TIME  $now"
+    printf '  \033[38;5;240mKERNEL  %s   •   MODO  AUDITORÍA AUTORIZADA\033[0m\n\n' "$kernel"
 }
 
 # Enhanced Main Menu with Categories
 show_main_menu() {
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_TOP']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['CYAN']}${UNICODE['TERMINAL']} SOKIX Toolkit v$VERSION ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
-    
-    # CategorÃ­a: OSINT
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['ORANGE']}${UNICODE['MAGNIFIER']} Herramientas OSINT ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}1.${COLORS['NC']} AllHackingTools ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}2.${COLORS['NC']} NetSoc_OSINT ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}3.${COLORS['NC']} OSINT-Framework ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}4.${COLORS['NC']} ReconDog ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}5.${COLORS['NC']} OSINT-Tool ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}6.${COLORS['NC']} OSINT-Toolkit ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    
-    # CategorÃ­a: ExplotaciÃ³n Web
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['ORANGE']}${UNICODE['MAGNIFIER']} ExplotaciÃ³n Web ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}7.${COLORS['NC']} XSS-Tools ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}8.${COLORS['NC']} D-TECT ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}9.${COLORS['NC']} XSStrike ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}10.${COLORS['NC']} SQLMap ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}11.${COLORS['NC']} WPScan ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}12.${COLORS['NC']} Burp Suite ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}13.${COLORS['NC']} OWASP ZAP ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}14.${COLORS['NC']} BeEF ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    
-    # CategorÃ­a: ExplotaciÃ³n y Post-ExplotaciÃ³n
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['ORANGE']}${UNICODE['SWORD']} ExplotaciÃ³n y Post-ExplotaciÃ³n ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}15.${COLORS['NC']} Metasploit Framework ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}16.${COLORS['NC']} Empire ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}17.${COLORS['NC']} Cobalt Strike ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}18.${COLORS['NC']} Mimikatz ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}19.${COLORS['NC']} CrackMapExec ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}20.${COLORS['NC']} Impacket ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    
-    # CategorÃ­a: Escaneo y AnÃ¡lisis de Red
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['ORANGE']}${UNICODE['SATELLITE']} Escaneo y AnÃ¡lisis de Red ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}21.${COLORS['NC']} Nmap ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}22.${COLORS['NC']} Wireshark ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}23.${COLORS['NC']} Bettercap ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}24.${COLORS['NC']} Nessus ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    
-    # CategorÃ­a: AnÃ¡lisis Web
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['ORANGE']}${UNICODE['MAGNIFIER']} AnÃ¡lisis Web ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}25.${COLORS['NC']} Burp Suite ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}26.${COLORS['NC']} ZAP (Zed Attack Proxy) ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}27.${COLORS['NC']} sqlmap ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}28.${COLORS['NC']} XSStrike ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}29.${COLORS['NC']} Vega ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}30.${COLORS['NC']} Nikto ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}31.${COLORS['NC']} Skipfish ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}32.${COLORS['NC']} Wfuzz ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    
-    # CategorÃ­a: OSINT y Reconocimiento
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['ORANGE']}${UNICODE['MAGNIFIER']} OSINT y Reconocimiento ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}33.${COLORS['NC']} Maltego ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}34.${COLORS['NC']} Recon-ng ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}35.${COLORS['NC']} SpiderFoot ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}36.${COLORS['NC']} Amass ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}37.${COLORS['NC']} Sublist3r ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}38.${COLORS['NC']} Fierce ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}39.${COLORS['NC']} Subfinder ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}40.${COLORS['NC']} Dirsearch ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}41.${COLORS['NC']} Nuclei ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}42.${COLORS['NC']} Gobuster ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    
-    # CategorÃ­a: IngenierÃ­a Social
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['ORANGE']}${UNICODE['GHOST']} IngenierÃ­a Social ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}43.${COLORS['NC']} Social-Engineer Toolkit (SET) ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}44.${COLORS['NC']} GoPhish ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}45.${COLORS['NC']} Zphisher ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    
-    # CategorÃ­a: AnÃ¡lisis de Redes InalÃ¡mbricas
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['ORANGE']}${UNICODE['SATELLITE']} AnÃ¡lisis de Redes InalÃ¡mbricas ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}46.${COLORS['NC']} Aircrack-ng ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    
-    # CategorÃ­a: Herramientas de Cracking
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['ORANGE']}${UNICODE['KEY']} Herramientas de Cracking ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}47.${COLORS['NC']} Hashcat ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}48.${COLORS['NC']} John the Ripper ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}49.${COLORS['NC']} Hydra ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}50.${COLORS['NC']} Cewl ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    
-    # CategorÃ­a: Utilidades
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['ORANGE']}${UNICODE['TOOLS']} Utilidades ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}51.${COLORS['NC']} ProxyChains ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}52.${COLORS['NC']} GoReverseShell ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}53.${COLORS['NC']} T50 ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}54.${COLORS['NC']} Nginx Helper ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}55.${COLORS['NC']} Crackstation ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    
-    # CategorÃ­a: Sistema
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['ORANGE']}${UNICODE['GEAR']} Sistema ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}56.${COLORS['NC']} ConfiguraciÃ³n ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}57.${COLORS['NC']} Actualizaciones ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}58.${COLORS['NC']} Salir ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    
-    # CategorÃ­a: Hacking de Juegos
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['ORANGE']}${UNICODE['GAME']} Hacking de Juegos ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}59.${COLORS['NC']} Game Hacking Framework ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}60.${COLORS['NC']} Cheat Engine ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}61.${COLORS['NC']} Squalr ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}62.${COLORS['NC']} MungPlex ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}63.${COLORS['NC']} GTA SA Cheats ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}64.${COLORS['NC']} Payback2 Cheats ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}65.${COLORS['NC']} SimCity Cheat ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}66.${COLORS['NC']} Warzone2100 ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}67.${COLORS['NC']} StellarRealms ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}68.${COLORS['NC']} Online Games Hacking ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}69.${COLORS['NC']} Memory Signature Scanner ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}70.${COLORS['NC']} D3D11 Hook ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    
-    # CategorÃ­a: Hacking de Aplicaciones MÃ³viles
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['ORANGE']}${UNICODE['MOBILE']} Hacking de Aplicaciones MÃ³viles ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}71.${COLORS['NC']} WhatsAppHacking ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}72.${COLORS['NC']} Android Studio ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}73.${COLORS['NC']} APKTool ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}74.${COLORS['NC']} Dex2Jar ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
-    
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_BOTTOM']}${COLORS['NC']}"
-    echo -e "${COLORS['GREEN']}${UNICODE['SUCCESS']} Seleccione una herramienta o mÃ³dulo para comenzar${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_BOTTOM']}${COLORS['NC']}"
+    local installed=0 category
+    [[ -d "$TOOLS_DIR" ]] && installed=$(find "$TOOLS_DIR" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
+    printf '  \033[48;5;236m\033[38;5;51m  ◈ PANEL DE CONTROL\033[0m  \033[38;5;240m──────────────────────────────────────────────────────\033[0m\n'
+    printf '  \033[38;5;250mHerramientas locales: \033[1;97m%-4s\033[0m  \033[38;5;250mDirectorio: \033[38;5;45m%s\033[0m\n\n' "$installed" "$TOOLS_DIR"
+    printf '  \033[38;5;213m┌─ RECONOCIMIENTO & OSINT ────────────────────────────────────────────────┐\033[0m\n'
+    printf '  \033[38;5;45m 01–06\033[0m  Fuentes OSINT, ReconDog, Recon Framework\n'
+    printf '  \033[38;5;213m┌─ SEGURIDAD WEB ─────────────────────────────────────────────────────────┐\033[0m\n'
+    printf '  \033[38;5;45m 07–14\033[0m  XSS, SQLMap, WPScan, Burp Suite, OWASP ZAP\n'
+    printf '  \033[38;5;213m┌─ REDES & AUDITORÍA ─────────────────────────────────────────────────────┐\033[0m\n'
+    printf '  \033[38;5;45m 15–32\033[0m  Frameworks, Nmap, Wireshark, escáneres y analizadores\n'
+    printf '  \033[38;5;213m┌─ INTELIGENCIA, UTILIDADES & CRACKING ────────────────────────────────────┐\033[0m\n'
+    printf '  \033[38;5;45m 33–55\033[0m  Reconocimiento, herramientas de red y auditoría de credenciales\n'
+    printf '  \033[38;5;213m┌─ SISTEMA & LABORATORIOS ─────────────────────────────────────────────────┐\033[0m\n'
+    printf '  \033[38;5;45m 56\033[0m Configuración   \033[38;5;45m57\033[0m Actualizaciones   \033[38;5;45m58\033[0m Salir\n'
+    printf '  \033[38;5;45m 59–70\033[0m Laboratorios de juegos   \033[38;5;45m71–74\033[0m Análisis móvil\n\n'
+    printf '  \033[38;5;240m─────────────────────────────────────────────────────────────────────────\033[0m\n'
+    printf '  \033[38;5;250mSelecciona un número para abrir sus acciones.\033[0m\n'
+    printf '  \033[38;5;240mTip: Ctrl+C para cancelar una operación en curso.\033[0m\n\n'
 }
 
 # Advanced Error Handling Function
@@ -410,18 +292,18 @@ log_error() {
 # Show Error Options Function
 show_error_options() {
     echo -e "${COLORS[YELLOW]}Opciones disponibles:${COLORS[NC]}"
-    echo -e "1. ${COLORS[GREEN]}Reintentar operaciÃ³n${COLORS[NC]}"
+    echo -e "1. ${COLORS[GREEN]}Reintentar operación${COLORS[NC]}"
     echo -e "2. ${COLORS[GREEN]}Verificar dependencias${COLORS[NC]}"
-    echo -e "3. ${COLORS[GREEN]}Reparar configuraciÃ³n${COLORS[NC]}"
+    echo -e "3. ${COLORS[GREEN]}Reparar configuración${COLORS[NC]}"
     echo -e "4. ${COLORS[GREEN]}Salir${COLORS[NC]}"
     
-    read -p "Seleccione una opciÃ³n: " option
+    read -p "Seleccione una opción: " option
     case $option in
         1) return 0 ;;
         2) check_dependencies ;;
         3) verify_configurations ;;
         4) exit 1 ;;
-        *) echo -e "${COLORS[RED]}OpciÃ³n invÃ¡lida${COLORS[NC]}" ;;
+        *) echo -e "${COLORS[RED]}Opción invÃ¡lida${COLORS[NC]}" ;;
     esac
 }
 
@@ -450,7 +332,7 @@ EOF
 # Set up error trap
 # Se evita una recuperación ERR global que alteraba permisos recursivamente.
 
-# ConfiguraciÃ³n avanzada del entorno
+# Configuración avanzada del entorno
 declare -a MODULES=(
     "core"
     "network"
@@ -466,7 +348,7 @@ declare -a MODULES=(
     "custom"
 )
 
-# Sistema de mÃ³dulos
+# Sistema de módulos
 declare -A MODULE_CONFIGS
 MODULE_CONFIGS=(
     [core]="core_config.yaml"
@@ -497,7 +379,7 @@ THEMES=(
 # Sistema de animaciones
 declare -A ANIMATIONS
 ANIMATIONS=(
-    [loading]="â  â  â ¹ â ¸ â ¼ â ´ â ¦ â § â  â "
+    [loading]="| / - \\"
     [scanning]="â° â±"
     [hacking]="â â â â â â â â â â â â â â â"
     [processing]="â â â â"
@@ -677,7 +559,7 @@ declare -A GITHUB_REPOS=(
     ["GameMaster"]="https://github.com/GameMaster/GameMaster"
     ["GameWarden"]="https://github.com/GameWarden/GameWarden"
     
-    # Hacking de Aplicaciones MÃ³viles (20 herramientas)
+    # Hacking de Aplicaciones Móviles (20 herramientas)
     ["WhatsAppHacking"]="https://github.com/WhatsAppHacking/WhatsAppHacking"
     ["Android-Studio"]="https://github.com/android/studio"
     ["APKTool"]="https://github.com/iBotPeaches/Apktool"
@@ -787,7 +669,7 @@ declare -a REQUIRED_TOOLS=(
     "aircrack-ng"
 )
 
-# FunciÃ³n mejorada para mostrar la pantalla de carga
+# Función mejorada para mostrar la pantalla de carga
 show_loading_screen() {
     local total_steps=7
     local current_step=0
@@ -811,10 +693,10 @@ show_loading_screen() {
     current_step=$((current_step + 1))
     show_progress "Inicializando sistema" $current_step $total_steps
     
-    # Paso 2: AutodiagnÃ³stico
+    # Paso 2: Autodiagnóstico
     perform_diagnostic
     current_step=$((current_step + 1))
-    show_progress "DiagnÃ³stico completado" $current_step $total_steps
+    show_progress "Diagnóstico completado" $current_step $total_steps
     
     # Paso 3: Descargando herramientas
     echo -e "\n${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
@@ -845,7 +727,7 @@ show_loading_screen() {
         # Instalar la herramienta
         install_tool "$tool"
         
-        # Verificar si la instalaciÃ³n fue exitosa
+        # Verificar si la instalación fue exitosa
         if [ $? -eq 0 ]; then
             echo -e "\r${COLORS['GREEN']}${UNICODE['SUCCESS']} $tool instalado correctamente${COLORS['NC']}"
         else
@@ -856,9 +738,9 @@ show_loading_screen() {
     current_step=$((current_step + 1))
     show_progress "Herramientas descargadas" $current_step $total_steps
     
-    # Paso 4: Cargando mÃ³dulos con animaciÃ³n
+    # Paso 4: Cargando módulos con animaciÃ³n
     echo -e "\n${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['CYAN']}${UNICODE['GEAR']} Cargando mÃ³dulos del sistema... ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
+    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['CYAN']}${UNICODE['GEAR']} Cargando módulos del sistema... ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
     echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
     
     for module in "${MODULES[@]}"; do
@@ -867,7 +749,7 @@ show_loading_screen() {
     done
     
     current_step=$((current_step + 1))
-    show_progress "MÃ³dulos cargados" $current_step $total_steps
+    show_progress "Módulos cargados" $current_step $total_steps
     
     # Paso 5: Verificando dependencias con animaciÃ³n
     echo -e "\n${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
@@ -909,10 +791,10 @@ show_loading_screen() {
     sleep 2
 }
 
-# FunciÃ³n para mostrar informaciÃ³n del sistema
+# Función para mostrar información del sistema
 show_system_info() {
     echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_TOP']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['CYAN']}${UNICODE['TERMINAL']} InformaciÃ³n del Sistema ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
+    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['CYAN']}${UNICODE['TERMINAL']} Información del Sistema ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
     echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
     
     local os_info=$(uname -a)
@@ -927,7 +809,7 @@ show_system_info() {
     echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_BOTTOM']}${COLORS['NC']}"
 }
 
-# FunciÃ³n para realizar el diagnÃ³stico del sistema
+# Función para realizar el diagnóstico del sistema
 perform_diagnostic() {
     local total_checks=10
     local current_check=0
@@ -936,7 +818,7 @@ perform_diagnostic() {
     local error_count=0
 
     echo -e "\n${COLORS['PURPLE']}${UNICODE['BORDER_TOP']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['CYAN']}${UNICODE['MAGNIFIER']} Iniciando diagnÃ³stico del sistema... ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
+    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['CYAN']}${UNICODE['MAGNIFIER']} Iniciando diagnóstico del sistema... ${COLORS['NC']}${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
     echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
 
     # 1. Verificar sistema operativo
@@ -1038,20 +920,20 @@ perform_diagnostic() {
         echo -e "\r${COLORS['YELLOW']}${UNICODE['WARNING']} Faltan algunas herramientas${COLORS['NC']}"
     fi
 
-    # 10. Verificar configuraciÃ³n
+    # 10. Verificar configuración
     current_check=$((current_check + 1))
-    echo -ne "\r${COLORS['CYAN']}[$current_check/$total_checks] Verificando configuraciÃ³n...${COLORS['NC']}"
+    echo -ne "\r${COLORS['CYAN']}[$current_check/$total_checks] Verificando configuración...${COLORS['NC']}"
     if check_configuration; then
         success_count=$((success_count + 1))
-        echo -e "\r${COLORS['GREEN']}${UNICODE['SUCCESS']} ConfiguraciÃ³n correcta${COLORS['NC']}"
+        echo -e "\r${COLORS['GREEN']}${UNICODE['SUCCESS']} Configuración correcta${COLORS['NC']}"
     else
         warning_count=$((warning_count + 1))
-        echo -e "\r${COLORS['YELLOW']}${UNICODE['WARNING']} ConfiguraciÃ³n incompleta${COLORS['NC']}"
+        echo -e "\r${COLORS['YELLOW']}${UNICODE['WARNING']} Configuración incompleta${COLORS['NC']}"
     fi
 
     # Mostrar resumen
     echo -e "\n${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['CYAN']}Resumen del diagnÃ³stico:${COLORS['NC']} ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
+    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['CYAN']}Resumen del diagnóstico:${COLORS['NC']} ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
     echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}Ãxitos: $success_count${COLORS['NC']} ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
     echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['YELLOW']}Advertencias: $warning_count${COLORS['NC']} ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
     echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['RED']}Errores: $error_count${COLORS['NC']} ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
@@ -1067,7 +949,7 @@ perform_diagnostic() {
     fi
 }
 
-# FunciÃ³n para verificar el sistema operativo
+# Función para verificar el sistema operativo
 check_os() {
     case "$(uname -s)" in
         Linux)
@@ -1100,7 +982,7 @@ check_os() {
     return 1
 }
 
-# FunciÃ³n para verificar memoria RAM
+# Función para verificar memoria RAM
 check_memory() {
     local min_ram=4000  # 4GB en MB
     local recommended_ram=8000  # 8GB en MB
@@ -1117,7 +999,7 @@ check_memory() {
     fi
 }
 
-# FunciÃ³n para verificar almacenamiento
+# Función para verificar almacenamiento
 check_storage() {
     local min_storage=20000  # 20GB en MB
     local available_storage=$(df -m / | awk 'NR==2 {print $4}')
@@ -1128,7 +1010,7 @@ check_storage() {
     return 1
 }
 
-# FunciÃ³n para verificar CPU
+# Función para verificar CPU
 check_cpu() {
     local min_cores=2
     local cores=$(nproc)
@@ -1139,7 +1021,7 @@ check_cpu() {
     return 1
 }
 
-# FunciÃ³n para verificar red
+# Función para verificar red
 check_network() {
     if ping -c 1 google.com &> /dev/null; then
         return 0
@@ -1147,7 +1029,7 @@ check_network() {
     return 1
 }
 
-# FunciÃ³n para verificar directorios
+# Función para verificar directorios
 check_directories() {
     local required_dirs=(
         "$TOOLS_DIR"
@@ -1170,13 +1052,13 @@ check_directories() {
     return 0
 }
 
-# FunciÃ³n para verificar configuraciÃ³n
+# Función para verificar configuración
 check_configuration() {
     if [ ! -f "$CONFIG_FILE" ]; then
         create_default_config || return 1
     fi
     
-    # Verificar permisos del archivo de configuraciÃ³n
+    # Verificar permisos del archivo de configuración
     if [ ! -r "$CONFIG_FILE" ] || [ ! -w "$CONFIG_FILE" ]; then
         return 1
     fi
@@ -1184,18 +1066,18 @@ check_configuration() {
     return 0
 }
 
-# FunciÃ³n para mostrar la carga de mÃ³dulos con animaciÃ³n
+# Función para mostrar la carga de módulos con animaciÃ³n
 show_module_loading() {
     local module=$1
     echo -ne "\r${COLORS['CYAN']}["
     for ((i=0; i<50; i++)); do
         echo -ne "${ANIMATIONS['processing'][$((i % ${#ANIMATIONS['processing'][@]}))]}"
     done
-    echo -ne "] Cargando mÃ³dulo: $module...${COLORS['NC']}"
+    echo -ne "] Cargando módulo: $module...${COLORS['NC']}"
     sleep 0.3
 }
 
-# FunciÃ³n para mostrar resumen del sistema
+# Función para mostrar resumen del sistema
 show_system_summary() {
     local total_modules=${#MODULES[@]}
     local total_tools=$(ls "$TOOLS_DIR" | wc -l)
@@ -1203,14 +1085,14 @@ show_system_summary() {
     local security_status="OK"
     local performance_status="OK"
     
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['YELLOW']}MÃ³dulos cargados:${COLORS['NC']} $total_modules ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
+    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['YELLOW']}Módulos cargados:${COLORS['NC']} $total_modules ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
     echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['YELLOW']}Herramientas instaladas:${COLORS['NC']} $total_tools ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
     echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['YELLOW']}Estado del sistema:${COLORS['NC']} $system_status ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
     echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['YELLOW']}Estado de seguridad:${COLORS['NC']} $security_status ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
     echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['YELLOW']}Rendimiento:${COLORS['NC']} $performance_status ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
 }
 
-# Funciones de diagnÃ³stico especÃ­ficas
+# Funciones de diagnóstico especÃ­ficas
 check_system() {
     # Check system requirements
     if [ "$(uname)" != "Linux" ]; then
@@ -1251,7 +1133,7 @@ check_performance() {
 check_dependencies() {
     for dep in "${REQUIRED_DEPENDENCIES[@]}"; do
         if ! command -v "$dep" >/dev/null 2>&1; then
-            log_warning "$dep no estÃ¡ instalado"
+            log_warning "$dep no está instalado"
             install_dependency "$dep"
         fi
     done
@@ -1277,7 +1159,7 @@ check_tools() {
             install_dependency "$tool"
         done
         
-        # Verificar nuevamente despuÃ©s de la instalaciÃ³n
+        # Verificar nuevamente despuÃ©s de la instalación
         local still_missing=()
         for tool in "${missing_tools[@]}"; do
             if ! command -v "$tool" &> /dev/null; then
@@ -1324,7 +1206,7 @@ check_permissions() {
     return 0
 }
 
-# FunciÃ³n para mostrar progreso con animaciÃ³n
+# Función para mostrar progreso con animaciÃ³n
 show_progress() {
     local message=$1
     local current=$2
@@ -1345,7 +1227,7 @@ show_progress() {
     echo -ne "] ${message}...${COLORS['NC']}"
 }
 
-# FunciÃ³n para cargar mÃ³dulos
+# Función para cargar módulos
 load_module() {
     local module=$1
     local config_file="${MODULE_CONFIGS[$module]}"
@@ -1353,11 +1235,11 @@ load_module() {
     if [ -f "$CONFIG_DIR/$config_file" ]; then
         log_info "Configuración disponible para el módulo $module: $CONFIG_DIR/$config_file"
     else
-        log_warning "ConfiguraciÃ³n no encontrada para $module"
+        log_warning "Configuración no encontrada para $module"
     fi
 }
 
-# FunciÃ³n para instalar dependencias
+# Función para instalar dependencias
 install_dependency() {
     local dep=${1:-}
     if [[ -z "$dep" ]]; then
@@ -1372,7 +1254,7 @@ install_dependency() {
     return 1
 }
 
-# FunciÃ³n para configurar el entorno
+# Función para configurar el entorno
 setup_environment() {
     # Configurar variables de entorno
     export PATH="$PATH:$TOOLS_DIR/bin"
@@ -1389,7 +1271,7 @@ setup_environment() {
     chmod 755 "$TOOLS_DIR" "$TOOLS_DIR/bin" "$TOOLS_DIR/python" "$TOOLS_DIR/ruby" "$TOOLS_DIR/perl" "$TOOLS_DIR/java" 2>/dev/null || true
 }
 
-# FunciÃ³n para inicializar herramientas
+# Función para inicializar herramientas
 initialize_tools() {
     local tools=($(ls "$TOOLS_DIR"))
     local total_tools=${#tools[@]}
@@ -1415,9 +1297,9 @@ initialize_tools() {
         fi
     done
     
-    # Mostrar resumen de inicializaciÃ³n
+    # Mostrar resumen de inicialización
     echo -e "\n${COLORS['PURPLE']}${UNICODE['BORDER_MIDDLE']}${COLORS['NC']}"
-    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['CYAN']}Resumen de inicializaciÃ³n:${COLORS['NC']} ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
+    echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['CYAN']}Resumen de inicialización:${COLORS['NC']} ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
     echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']} ${COLORS['GREEN']}Herramientas inicializadas: $((total_tools - ${#failed_tools[@]}))${COLORS['NC']} ${COLORS['PURPLE']}${UNICODE['BORDER_SIDE']}${COLORS['NC']}"
     
     if [ ${#failed_tools[@]} -gt 0 ]; then
@@ -1427,7 +1309,7 @@ initialize_tools() {
     echo -e "${COLORS['PURPLE']}${UNICODE['BORDER_BOTTOM']}${COLORS['NC']}"
 }
 
-# FunciÃ³n para encontrar el archivo principal de una herramienta
+# Función para encontrar el archivo principal de una herramienta
 find_main_file() {
     local tool_dir=${1:-} candidate
     [[ -d "$tool_dir" ]] || return 1
@@ -1437,37 +1319,47 @@ find_main_file() {
     done
     for candidate in "$tool_dir"/*.sh "$tool_dir"/*.py "$tool_dir"/*.rb "$tool_dir"/*.jar; do
         [[ -f "$candidate" ]] || continue
+        case "$(basename "$candidate")" in
+            fix.sh|install.sh|setup.sh|uninstall.sh|update.sh|build.sh|test.sh) continue ;;
+        esac
         printf '%s\n' "$candidate"; return 0
     done
     return 1
 }
 
-# FunciÃ³n para ejecutar herramientas
+# Función para ejecutar herramientas
 run_tool() {
     local tool_name=${1:-} tool_dir main_file extension python_bin
     [[ -n "$tool_name" ]] || { log_error "No se indicó herramienta"; return 2; }
     shift
     tool_dir="$TOOLS_DIR/$tool_name"
-    [[ -d "$tool_dir" ]] || { log_error "$tool_name no está instalada en $tool_dir"; return 1; }
-    main_file=$(find_main_file "$tool_dir") || { log_error "No encuentro un punto de entrada claro para $tool_name. Consulta su README."; return 1; }
+    # Compatibilidad con instalaciones anteriores en /opt/sokix/tools.
+    if [[ ! -d "$tool_dir" && -d "/opt/sokix/tools/$tool_name" ]]; then
+        tool_dir="/opt/sokix/tools/$tool_name"
+    fi
+    [[ -d "$tool_dir" ]] || { log_error "$tool_name no está instalada. Directorios revisados: $TOOLS_DIR/$tool_name y /opt/sokix/tools/$tool_name"; return 1; }
+    # Nunca elegir fix.sh como punto de entrada: en AllHackingTools es un reparador
+    # auxiliar que presupone un directorio de trabajo distinto y causa los errores
+    # de rutas relativas mostrados en la captura.
+    main_file=$(find_main_file "$tool_dir") || { log_error "No encuentro un punto de entrada principal seguro para $tool_name. Revisa su README; los scripts auxiliares no se ejecutan automáticamente."; return 1; }
     extension=${main_file##*.}
     log_warning "Vas a ejecutar código de terceros: $main_file"
     read -r -p "Confirma que tienes autorización y revisaste el código (escribe SI): " confirm
     [[ "$confirm" == "SI" ]] || { log_info "Ejecución cancelada."; return 0; }
     case "$extension" in
-        sh) bash "$main_file" "$@" ;;
+        sh) ( cd "$tool_dir" && bash "$main_file" "$@" ) ;;
         py)
             python_bin="$tool_dir/.venv/bin/python"
             [[ -x "$python_bin" ]] || python_bin=$(command -v python3 || true)
             [[ -n "$python_bin" ]] || { log_error "Falta python3"; return 1; }
-            "$python_bin" "$main_file" "$@" ;;
-        rb) command -v ruby >/dev/null 2>&1 || { log_error "Falta ruby"; return 1; }; ruby "$main_file" "$@" ;;
-        jar) command -v java >/dev/null 2>&1 || { log_error "Falta Java"; return 1; }; java -jar "$main_file" "$@" ;;
+            ( cd "$tool_dir" && "$python_bin" "$main_file" "$@" ) ;;
+        rb) command -v ruby >/dev/null 2>&1 || { log_error "Falta ruby"; return 1; }; ( cd "$tool_dir" && ruby "$main_file" "$@" ) ;;
+        jar) command -v java >/dev/null 2>&1 || { log_error "Falta Java"; return 1; }; ( cd "$tool_dir" && java -jar "$main_file" "$@" ) ;;
         *) log_error "Tipo de entrada no compatible automáticamente: .$extension. Consulta el README."; return 1 ;;
     esac
 }
 
-# FunciÃ³n para verificar si una herramienta estÃ¡ instalada
+# Función para verificar si una herramienta está instalada
 is_tool_installed() {
     local tool_name=${1:-} tool_dir="${TOOLS_DIR}/${1:-}" command_name=""
     case "$tool_name" in
@@ -1482,7 +1374,7 @@ is_tool_installed() {
     find_main_file "$tool_dir" >/dev/null 2>&1
 }
 
-# FunciÃ³n para instalar herramientas
+# Función para instalar herramientas
 install_tool() {
     local tool_name=${1:-} repo_url tool_dir stage venv_dir
     [[ -n "$tool_name" ]] || { log_error "No se indicó herramienta"; return 2; }
@@ -1502,10 +1394,16 @@ install_tool() {
             log_success "$apt_package ya está instalado por APT"; return 0
         fi
         log_warning "Instalando paquete de distribución: $apt_package"
-        if DEBIAN_FRONTEND=noninteractive apt-get install -y -- "$apt_package"; then
-            log_success "$tool_name instalado mediante APT"; return 0
+        if [[ ${EUID:-$(id -u)} -eq 0 ]]; then
+            if DEBIAN_FRONTEND=noninteractive apt-get install -y -- "$apt_package"; then
+                log_success "$tool_name instalado mediante APT"; return 0
+            fi
+        elif command -v sudo >/dev/null 2>&1; then
+            if sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y -- "$apt_package"; then
+                log_success "$tool_name instalado mediante APT"; return 0
+            fi
         fi
-        log_error "APT no pudo instalar $apt_package; no continuaré con un clon alternativo automático."
+        log_error "APT no pudo instalar $apt_package; revisa permisos y repositorios."
         return 1
     fi
     command -v git >/dev/null 2>&1 || { log_error "Falta git. Instálalo con: apt install git"; return 1; }
@@ -1648,7 +1546,7 @@ Herramienta seleccionada: %s\
     read -r -p "Pulsa Intro para volver al menú..." _
 }
 
-# FunciÃ³n principal
+# Función principal
 main() {
     local choice
     startup_animation
@@ -1658,7 +1556,7 @@ main() {
         show_banner
         show_main_menu
         if ! read -r -p "Selecciona una opción (1-74, 58 para salir): " choice; then
-            printf '\\nSaliendo de SOKIX.\\n'
+            printf '\nSaliendo de SOKIX.\n'
             break
         fi
         handle_tool_selection "$choice"
