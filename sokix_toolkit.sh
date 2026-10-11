@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # SOKIX Toolkit - Professional Ethical Hacking Environment
-# Version: 9.1.0
+# Version: 10.0.0
 # License: MIT
 # Author: SOKIX Security Team
 
@@ -10,7 +10,7 @@ set -euo pipefail
 IFS=$'\n\t'
 
 # Advanced Global Configuration
-readonly VERSION="9.1.0"
+readonly VERSION="10.0.0"
 readonly TOOLKIT_NAME="SOKIX Professional Hacking Toolkit"
 readonly CONFIG_FILE="${SOKIX_HOME:-${HOME:-/tmp}/.local/share/sokix}/config/config.yaml"
 readonly CONFIG_DIR="$(dirname "$CONFIG_FILE")"
@@ -171,26 +171,75 @@ declare -A DIAGNOSTIC_CHECKS=(
 # Animación breve de inicio (sin dependencias externas; respeta terminales no interactivos).
 startup_animation() {
     [[ -t 1 ]] || return 0
-    local frames=("INICIALIZANDO NÚCLEO" "VERIFICANDO ENTORNO" "PREPARANDO MÓDULOS" "CONSOLA LISTA") frame i
-    printf '\033[2J\033[H'
-    printf '\033[38;5;51m'
+    local i frame pct width=42
+    local frames=("INICIALIZANDO INTERFAZ RGB" "VERIFICANDO DEPENDENCIAS" "PREPARANDO DIRECTORIOS" "CARGANDO MODULOS" "CONSOLA LISTA")
+    printf '\033[2J\033[H\033[?25l'
+    trap 'printf "\033[0m\033[?25h"' RETURN
+    printf '\033[38;2;0;245;255m'
     cat <<'BANNER'
-╔══════════════════════════════════════════════════════════════════════╗
-║  ███████╗ ██████╗ ██╗  ██╗██╗██╗  ██╗                              ║
-║  ██╔════╝██╔═══██╗██║ ██╔╝██║╚██╗██╔╝                              ║
-║  ███████╗██║   ██║█████╔╝ ██║ ╚███╔╝                               ║
-║  ╚════██║██║   ██║██╔═██╗ ██║ ██╔██╗                               ║
-║  ███████║╚██████╔╝██║  ██╗██║██╔╝ ██╗                              ║
-║  ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝                              ║
-╚══════════════════════════════════════════════════════════════════════╝
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  ███████╗ ██████╗ ██╗  ██╗██╗██╗  ██╗                                      ║
+║  ██╔════╝██╔═══██╗██║ ██╔╝██║╚██╗██╔╝                                      ║
+║  ███████╗██║   ██║█████╔╝ ██║ ╚███╔╝                                       ║
+║  ╚════██║██║   ██║██╔═██╗ ██║ ██╔██╗                                       ║
+║  ███████║╚██████╔╝██║  ██╗██║██╔╝ ██╗                                      ║
+║  ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝                                      ║
+║             S E C U R I T Y   O P S   //   N E O N   E D I T I O N          ║
+╚══════════════════════════════════════════════════════════════════════════════╝
 BANNER
     printf '\033[0m\n'
     for frame in "${frames[@]}"; do
-        printf '\033[38;5;45m  ◈ SOKIX \033[38;5;250m%-27s \033[0m' "$frame"
-        for ((i=0; i<18; i++)); do printf '\033[38;5;51m▰\033[0m'; sleep 0.018; done
+        printf '\033[38;2;255;70;220m  ◈ \033[38;2;0;245;255m%-31s\033[0m ' "$frame"
+        for ((i=0; i<width; i++)); do
+            case $((i % 3)) in
+                0) printf '\033[38;2;0;245;255m▰\033[0m' ;;
+                1) printf '\033[38;2;180;70;255m▰\033[0m' ;;
+                2) printf '\033[38;2;255;70;220m▰\033[0m' ;;
+            esac
+            sleep 0.006
+        done
         printf '\n'
     done
-    sleep 0.12
+    printf '\033[?25h\033[0m'
+}
+
+# Comprueba e instala solo dependencias base del sistema. No instala en masa herramientas ofensivas.
+bootstrap_dependencies() {
+    [[ -t 0 && -t 1 ]] || return 0
+    local missing=() pkg
+    local packages=(git curl ca-certificates python3 python3-venv python3-pip pipx build-essential)
+    for pkg in "${packages[@]}"; do
+        dpkg-query -W -f='${Status}' "$pkg" 2>/dev/null | grep -q 'install ok installed' || missing+=("$pkg")
+    done
+    if ((${#missing[@]} == 0)); then
+        log_success "Dependencias base verificadas."
+        return 0
+    fi
+    printf '\n\033[38;2;0;245;255m╭─ PREPARACIÓN DEL ENTORNO ─────────────────────────────────────╮\033[0m\n'
+    printf '  Faltan paquetes base: %s\n' "${missing[*]}"
+    printf '  Se instalarán con APT; no se usará pip global ni --break-system-packages.\n'
+    read -r -p "¿Instalar dependencias base ahora? [S/n]: " answer
+    case "${answer,,}" in
+        n|no) log_warning "Se omite la instalación. Algunas herramientas podrían requerir dependencias."; return 0 ;;
+    esac
+    if ! command -v apt-get >/dev/null 2>&1; then
+        log_error "APT no está disponible; instala manualmente: ${missing[*]}"
+        return 1
+    fi
+    local -a apt_cmd=(apt-get)
+    if [[ ${EUID:-$(id -u)} -ne 0 ]]; then
+        if command -v sudo >/dev/null 2>&1; then apt_cmd=(sudo apt-get)
+        else log_error "Se necesitan permisos de administrador para APT."; return 1
+        fi
+    fi
+    printf '\033[38;2;180;70;255m[01/02]\033[0m Actualizando índices de paquetes...\n'
+    "${apt_cmd[@]}" update || { log_error "APT update falló; revisa conexión y repositorios."; return 1; }
+    printf '\033[38;2;0;245;255m[02/02]\033[0m Instalando dependencias base...\n'
+    DEBIAN_FRONTEND=noninteractive "${apt_cmd[@]}" install -y -- "${missing[@]}" || {
+        log_error "No se pudieron instalar todos los paquetes base."
+        return 1
+    }
+    log_success "Dependencias base listas. Las herramientas se instalan individualmente desde el menú."
 }
 
 # Advanced ASCII Art Banner
@@ -1319,8 +1368,10 @@ find_main_file() {
     done
     for candidate in "$tool_dir"/*.sh "$tool_dir"/*.py "$tool_dir"/*.rb "$tool_dir"/*.jar; do
         [[ -f "$candidate" ]] || continue
-        case "$(basename "$candidate")" in
-            fix.sh|install.sh|setup.sh|uninstall.sh|update.sh|build.sh|test.sh) continue ;;
+        # Los nombres de scripts auxiliares se filtran sin distinguir mayúsculas.
+        # Evita ejecutar Install.sh como si fuera la aplicación principal (caso del error pip2).
+        case "$(basename "$candidate" | tr '[:upper:]' '[:lower:]')" in
+            fix.sh|install.sh|setup.sh|uninstall.sh|update.sh|build.sh|test.sh|requirements.sh|configure.sh) continue ;;
         esac
         printf '%s\n' "$candidate"; return 0
     done
@@ -1429,9 +1480,21 @@ install_tool() {
         if ! python3 -m venv "$stage/repo/.venv"; then
             rm -rf -- "$stage"; log_error "No se pudo crear el entorno virtual. En Kali instala python3-venv."; return 1
         fi
-        if ! "$stage/repo/.venv/bin/python" -m pip install --disable-pip-version-check -r "$stage/repo/requirements.txt"; then
-            rm -rf -- "$stage"; log_error "Falló la instalación de dependencias de $tool_name"; return 1
+        if [[ -s "$stage/repo/requirements.txt" ]]; then
+            printf '\033[38;2;0;245;255m[ENV][0m Creando entorno Python aislado para %s...\n' "$tool_name"
+            if ! "$stage/repo/.venv/bin/python" -m pip install --disable-pip-version-check --upgrade pip; then
+                rm -rf -- "$stage"; log_error "No se pudo preparar pip dentro del entorno virtual de $tool_name"; return 1
+            fi
+            if ! "$stage/repo/.venv/bin/python" -m pip install --disable-pip-version-check -r "$stage/repo/requirements.txt"; then
+                rm -rf -- "$stage"; log_error "Falló la instalación aislada de dependencias de $tool_name. No se modificó el Python del sistema."; return 1
+            fi
+        else
+            log_info "$tool_name no contiene requirements.txt; no se instalarán paquetes Python por suposición."
         fi
+    fi
+    # Señala scripts heredados de instalación Python 2; nunca se ejecutan automáticamente.
+    if find "$stage/repo" -maxdepth 2 -type f -iname 'install.sh' -print -quit | grep -q .; then
+        log_warning "El repositorio incluye Install.sh. SOKIX no lo ejecutará automáticamente: algunos scripts antiguos usan pip2/rutas obsoletas."
     fi
     printf '%s\n' "$repo_url" > "$stage/repo/.sokix-source"
     : > "$stage/repo/.sokix-installed"
@@ -1552,10 +1615,11 @@ main() {
     startup_animation
     mkdir -p "$CONFIG_DIR" "$TOOLS_DIR" "$MODULES_DIR" "$SCRIPTS_DIR" "$CACHE_DIR" "$TEMP_DIR" "$BACKUP_DIR" "$REPORTS_DIR" "$(dirname "$LOG_FILE")" || { log_error "No se pudieron crear los directorios de SOKIX"; exit 1; }
     [[ -f "$CONFIG_FILE" ]] || create_default_config
+    bootstrap_dependencies || log_warning "La preparación base no se completó; SOKIX seguirá con funciones limitadas."
     while true; do
         show_banner
         show_main_menu
-        if ! read -r -p "Selecciona una opción (1-74, 58 para salir): " choice; then
+        if ! read -r -p "Selecciona una opción (1-74; 56 configuración, 57 actualizaciones, 58 salir): " choice; then
             printf '\nSaliendo de SOKIX.\n'
             break
         fi
